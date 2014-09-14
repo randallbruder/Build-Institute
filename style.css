@@ -1,0 +1,906 @@
+@import "css/reset.css";
+@import "css/sidebarEffects.css";
+@import "css/jquery.selectbox.css";
+@import "css/jquery.lightSlider.css";
+/*
+Theme Name:		Build Institute
+Theme URI:		http://buildinstitute.com
+Description:		A custom Wordpress theme designed and coded for the Build Institute.
+Version:			1.0
+Author:			Randall Bruder
+Author URI:		http://randallbruder.com
+Tags:			build, detroit
+*/
+body {
+  width: 100%;
+  *zoom: 1;
+}
+body:before,
+body:after {
+  content: "";
+  display: table;
+}
+body:after {
+  clear: both;
+}
+/**
+ * @license
+ * MyFonts Webfont Build ID 2865089, 2014-08-18T14:34:59-0400
+ *
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are
+ * explicitly restricted from using the Licensed Webfonts(s).
+ *
+ * You may obtain a valid license at the URLs below.
+ *
+ * Webfont: Brix Slab Black by HVD Fonts
+ * URL: http://www.myfonts.com/fonts/hvdfonts/brix-slab/black/
+ * Copyright: Copyright (c) 2011 by Hannes von Doehren, Livius Dietzel. All rights reserved.
+ * Licensed pageviews: 10,000
+ *
+ * Webfont: Intro by Fontfabric
+ * URL: http://www.myfonts.com/fonts/font-fabric/intro/
+ * Copyright: Copyright (c) 2012 by Fontfabric LLC. All rights reserved.
+ * Licensed pageviews: 20,000
+ *
+ * License: http://www.myfonts.com/viewlicense?type=web&buildid=2865089
+ *
+ * © 2014 MyFonts Inc
+*/
+@font-face {
+  font-family: 'BrixSlab';
+  src: url('fonts/BrixSlab-Black.eot');
+  src: url('fonts/BrixSlab-Black.eot?#iefix') format('embedded-opentype'), url('fonts/BrixSlab-Black.woff') format('woff'), url('fonts/BrixSlab-Black.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Intro';
+  src: url('fonts/IntroBold.eot');
+  src: url('fonts/IntroBold.eot?#iefix') format('embedded-opentype'), url('fonts/IntroBold.woff') format('woff'), url('fonts/IntroBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Intro';
+  src: url('fonts/IntroBoldItalic.eot');
+  src: url('fonts/IntroBoldItalic.eot?#iefix') format('embedded-opentype'), url('fonts/IntroBoldItalic.woff') format('woff'), url('fonts/IntroBoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Intro';
+  src: url('fonts/IntroRegular.eot');
+  src: url('fonts/IntroRegular.eot?#iefix') format('embedded-opentype'), url('fonts/IntroRegular.woff') format('woff'), url('fonts/IntroRegular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Intro';
+  src: url('fonts/IntroRegularItalic.eot');
+  src: url('fonts/IntroRegularItalic.eot?#iefix') format('embedded-opentype'), url('fonts/IntroRegularItalic.woff') format('woff'), url('fonts/IntroRegularItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+/* Icon Webfont */
+@font-face {
+  font-family: 'Icons';
+  src: url('fonts/Icons.eot');
+  src: url('fonts/Icons.eot?#iefix') format('embedded-opentype'), url('fonts/Icons.woff') format('woff'), url('fonts/Icons.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.icon:before {
+  font-family: 'Icons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: bottom;
+  font-size: 1.2em;
+  -webkit-font-smoothing: antialiased;
+}
+.icon-search:before {
+  content: '\e800';
+}
+/* '' */
+.icon-mail:before {
+  content: '\e801';
+}
+/* '' */
+.icon-facebook:before {
+  content: '\e802';
+}
+/* '' */
+.icon-twitter:before {
+  content: '\e803';
+}
+/* '' */
+.icon-down-open:before {
+  content: '\e804';
+}
+/* '' */
+.icon-calendar:before {
+  content: '\e807';
+}
+/* '' */
+.icon-check:before {
+  content: '\e805';
+}
+/* '' */
+.icon-arrow-right:before {
+  content: '\e806';
+}
+/* '' */
+.icon-arrow-down:before {
+  content: '\e808';
+}
+/* '' */
+.icon-arrow-up:before {
+  content: '\e809';
+}
+/* '' */
+.icon-arrow-left:before {
+  content: '\e80a';
+}
+/* '' */
+/*
+===========================
+CONTENTS:
+
+01 Sensible defaults
+02 LESS Variables
+03 Semantic Grid System
+04 Header
+05 Search/Newsletter Reveal
+06 Menu Styles
+07 Main Content
+08 Program Tiles
+09 Footer
+10 Media queries
+11 Misc & mixens
+===========================
+*/
+/* ----------------------------------------------------------------------------------------------------------
+01 Sensible defaults ----------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+div,
+article,
+section,
+header,
+footer,
+nav,
+li {
+  position: relative;
+  /* For absolutely positioning elements within containers (add more to the list if need be) */
+}
+.group:after {
+  display: block;
+  height: 0;
+  clear: both;
+  content: ".";
+  visibility: hidden;
+  /* For clearing */
+}
+body {
+  background: #f0efef;
+  /* Don't forget to style your body to avoid user overrides */
+}
+::-moz-selection {
+  background: #3ac4bb;
+  color: #fff;
+}
+::selection {
+  background: #3ac4bb;
+  color: #fff;
+}
+/* ----------------------------------------------------------------------------------------------------------
+02 LESS Variables -------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+body,
+input,
+textarea,
+p {
+  font-family: "Intro", Helvetica, Arial, sans-serif;
+  line-height: 23px;
+  font-size: 16px;
+  font-size: 1.6rem;
+  color: #636363;
+}
+h1,
+h2,
+h3 {
+  font-weight: normal;
+  font-family: "BrixSlab", Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.5px;
+}
+h1 {
+  line-height: 71.875px;
+  font-size: 50px;
+  font-size: 5rem;
+  padding-bottom: 10px;
+}
+h2 {
+  line-height: 43.125px;
+  font-size: 30px;
+  font-size: 3rem;
+  padding-bottom: 10px;
+}
+h3 {
+  line-height: 34.5px;
+  font-size: 24px;
+  font-size: 2.4rem;
+  padding-bottom: 10px;
+}
+h4 {
+  line-height: 23px;
+  font-size: 16px;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+/* ----------------------------------------------------------------------------------------------------------
+03 Semantic Grid System -------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+/* GRID */
+/* ----------------------------------------------------------------------------------------------------------
+04 Header ---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+header {
+  position: relative;
+}
+header #site-logo {
+  float: left;
+  z-index: 100;
+}
+#header-homepage {
+  height: 590px;
+  /* background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url('img/header.jpg') no-repeat center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover; */
+}
+/* Some jquery.lightSlider.min.js overrided styles (I'm sorry) */
+.csSlideOuter {
+  height: 590px;
+  position: absolute;
+  width: 100%;
+}
+.csSlideOuter .csPager.cSpg {
+  margin: -30px 0 0;
+}
+.csSlideOuter .csPager.cSpg > li:hover a,
+.csSlideOuter .csPager.cSpg > li.active a {
+  background-color: #3ac4bb;
+}
+.csSlideWrapper {
+  height: 590px !important;
+}
+.lightSlider {
+  padding-bottom: 300px !important;
+}
+/* Okay, we're back to our regularly scheduled CSS */
+#header-slider {
+  width: 100%;
+}
+#header-slider li {
+  height: 590px;
+  position: absolute;
+  list-style-type: none;
+}
+#header-slider li h1 {
+  line-height: 1.05;
+  display: inline;
+  float: left;
+  width: 61.80555556%;
+  margin: 0 0.34722222%;
+  margin-left: 12.84722222%;
+  padding-bottom: 20px;
+  color: #fff;
+  padding-top: 225px;
+}
+#header-slider li p {
+  display: inline;
+  float: left;
+  width: 49.30555556%;
+  margin: 0 0.34722222%;
+  margin-left: 12.84722222%;
+  color: #fff;
+}
+#header-slider a {
+  color: #fff;
+}
+#header-slider a:hover {
+  color: #3ac4bb;
+  text-decoration: none;
+}
+#header-content {
+  display: inline;
+  float: left;
+  width: 74.30555556%;
+  margin: 0 0.34722222%;
+  margin-left: 12.84722222%;
+  margin-right: 12.84722222%;
+  padding-top: 25px;
+}
+/* ----------------------------------------------------------------------------------------------------------
+05 Search/Newsletter Reveal ---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+.st-menu,
+#newsletter-sucess {
+  display: inline;
+  float: left;
+  width: 74.30555556%;
+  margin: 0 0.34722222%;
+  margin-left: 12.84722222%;
+}
+.st-menu form {
+  display: block;
+  width: 100.92592593%;
+  margin: 0 -0.46296296%;
+  *zoom: 1;
+}
+.st-menu form:before,
+.st-menu form:after {
+  content: "";
+  display: table;
+}
+.st-menu form:after {
+  clear: both;
+}
+.st-menu input[type='text'],
+.st-menu input[type='email'] {
+  line-height: 46px;
+  font-size: 32px;
+  font-size: 3.2rem;
+  color: #3ac4bb;
+  font-style: italic;
+  padding-top: 21px;
+  float: left;
+}
+.st-menu input[type='text']:focus,
+.st-menu input[type='email']:focus {
+  outline: 0;
+}
+.st-menu p {
+  float: right;
+  padding-top: 34px;
+}
+.newsletter-select {
+  display: inline-block;
+}
+.newsletter-select label {
+  display: inline-block;
+  /* background: #ccc; */
+  padding: 5px 12px 2px 0;
+  cursor: pointer;
+}
+#newsletter-options {
+  display: inline;
+  width: 32.40740741%;
+  margin: 0 0.46296296%;
+  padding-top: 21px;
+  float: left;
+}
+#mc-embedded-subscribe {
+  float: right;
+  line-height: 23px;
+  font-size: 16px;
+  font-size: 1.6rem;
+  border: 3px solid #3ac4bb;
+  padding: 5px 13px 0 !important;
+  margin-top: 26px !important;
+  outline: 0;
+  cursor: pointer;
+}
+input[type="checkbox"] {
+  display: none;
+}
+.st-menu input[type="email"] {
+  display: inline;
+  float: left;
+  width: 40.74074074%;
+  margin: 0 0.46296296%;
+}
+.st-menu input[type="text"] {
+  display: inline;
+  float: left;
+  width: 57.40740741%;
+  margin: 0 0.46296296%;
+}
+.st-menu input[type="checkbox"] + label:before {
+  font-family: 'Icons';
+  content: '';
+  display: inline-block;
+  width: 19px;
+  height: 19px;
+  background: #ccc;
+  margin-right: 7px;
+  margin-bottom: -3px;
+  overflow: hidden;
+  text-align: center;
+  line-height: 1.2;
+}
+.st-menu input[type="checkbox"]:checked + label {
+  color: #3ac4bb;
+}
+.st-menu input[type="checkbox"]:checked + label:before {
+  /* background: @accent-color; */
+  content: '\e805';
+  color: #fff;
+  background: #3ac4bb;
+}
+#newsletter-sucess {
+  display: none;
+  line-height: 46px;
+  font-size: 32px;
+  font-size: 3.2rem;
+  font-style: italic;
+}
+#newsletter-sucess p {
+  float: left;
+}
+/* ----------------------------------------------------------------------------------------------------------
+06 Menu Styles ----------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+/* A ghost button menu? */
+/* 2spooky4me */
+.site-navigation {
+  float: right;
+  display: inline-block;
+  padding-top: 15px;
+  z-index: 100;
+}
+.menu-primary-container,
+#menu-primary {
+  display: inline;
+}
+#menu-primary > li {
+  display: inline-block;
+  position: relative;
+}
+#menu-primary li a {
+  display: inline-block;
+  margin: 0 0 0 8px;
+  padding: 6px 16px 3px 15px;
+  line-height: 23px;
+  font-size: 16px;
+  font-size: 1.6rem;
+  line-height: 1.8;
+  appearance: none;
+  box-shadow: none;
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0);
+  text-decoration: none;
+  color: #939b9e;
+}
+#menu-primary > li:hover > a,
+.sub-menu li a {
+  border: solid 3px #939b9e;
+  padding: 3px 13px 0 12px !important;
+}
+.sub-menu {
+  display: none;
+  position: absolute;
+  white-space: nowrap;
+  top: 34px;
+  /* this should be the same height as the top level menu -- height + padding + borders */
+}
+.sub-menu ul {
+  list-style: none;
+}
+.sub-menu li {
+  display: block;
+  margin-bottom: -3px;
+}
+.sub-menu li a {
+  background: #f0efef !important;
+}
+.sub-menu li a:hover {
+  background: #939b9e !important;
+  color: #fff !important;
+}
+#menu-primary li:hover > .sub-menu {
+  display: block;
+  /* show sub menus when hovering over a parent */
+}
+/* Homepage Overrides */
+#header-homepage #menu-primary li a {
+  color: #fff;
+  background: none !important;
+}
+#header-homepage #menu-primary .sub-menu li a:hover {
+  background: #fff !important;
+  color: #000 !important;
+}
+#header-homepage #menu-primary > li:hover > a,
+#header-homepage .sub-menu li a {
+  border: solid 3px #fff;
+}
+/* Styling for the search/newsletter icons */
+#st-trigger-effects {
+  display: inline;
+  position: relative;
+  top: -5px;
+}
+#st-trigger-effects div {
+  padding-left: 20px;
+  display: inline-block;
+  color: #939b9e;
+  cursor: pointer;
+  line-height: 31.625px;
+  font-size: 22px;
+  font-size: 2.2rem;
+  -webkit-transition: color 250ms;
+  -moz-transition: color 250ms;
+  -ms-transition: color 250ms;
+  -o-transition: color 250ms;
+}
+#st-trigger-effects div:hover {
+  color: #3ac4bb;
+}
+/* Another homepage override */
+#header-homepage #st-trigger-effects div {
+  color: #fff;
+}
+#header-homepage #st-trigger-effects div:hover {
+  color: #3ac4bb;
+}
+/* ----------------------------------------------------------------------------------------------------------
+07 Main Content ---------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+main {
+  display: inline;
+  float: left;
+  width: 74.30555556%;
+  margin: 0 0.34722222%;
+  margin-left: 12.84722222%;
+  margin-top: 45px;
+}
+#homepage-content {
+  display: inline;
+  float: left;
+  width: 49.30555556%;
+  margin: 0 0.34722222%;
+  margin-left: 25.34722222%;
+}
+#homepage-content h2 {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+main {
+  /* Standards */
+}
+main p,
+main ul {
+  margin-bottom: 19.2px;
+}
+main li {
+  margin-bottom: 6.4px;
+}
+main ul {
+  padding-left: 20px;
+}
+main img {
+  max-width: 100%;
+  height: auto;
+}
+main > article > p:first-of-type {
+  line-height: 43.125px;
+  font-size: 30px;
+  font-size: 3rem;
+  font-family: "BrixSlab", Georgia, serif;
+  padding-left: 25px;
+  border-left: 13px solid #000;
+}
+main blockquote {
+  margin-left: 6.59722222%;
+  margin-right: 6.59722222%;
+}
+main a {
+  color: #3ac4bb;
+}
+main a:hover {
+  color: #3ac4bb;
+  text-decoration: none;
+}
+main hr {
+  border: 0;
+  color: #ccc;
+  background-color: #ccc;
+  height: 6px;
+  clear: both;
+}
+main .alignleft {
+  float: left;
+  padding: 10px 20px 25px 0;
+}
+main .alignright {
+  float: right;
+  padding: 10px 0 25px 20px;
+}
+.profile p:first-of-type {
+  line-height: 23px;
+  font-size: 16px;
+  font-size: 1.6rem;
+  padding-left: 0 !important;
+  border-left: none !important;
+  font-family: "Intro", Helvetica, Arial, sans-serif !important;
+}
+/* LIST STYLES */
+main,
+article {
+  /* First OL */
+}
+main > ol,
+article > ol {
+  list-style: none;
+  /* Second OL */
+}
+main > ol > li,
+article > ol > li {
+  padding-left: 20px;
+  background: url('img/arrow-right.svg') no-repeat left 2px;
+  background-size: 15px 15px;
+  cursor: pointer;
+  /* This is messed up, but at least it fixes the placement of the arrow if h2, h3, h4 styles are used. */
+}
+main > ol > li.active,
+article > ol > li.active {
+  background: url('img/arrow-down.svg') no-repeat left 2px;
+  background-size: 15px 15px;
+}
+main > ol > li h2,
+article > ol > li h2,
+main > ol > li h3,
+article > ol > li h3,
+main > ol > li h4,
+article > ol > li h4 {
+  padding-bottom: 0 !important;
+}
+main > ol > li h2,
+article > ol > li h2 {
+  position: relative;
+  top: -10px;
+}
+main > ol > li h3,
+article > ol > li h3 {
+  position: relative;
+  top: -6px;
+}
+main > ol > li h4,
+article > ol > li h4 {
+  position: relative;
+  top: -2px;
+}
+main > ol > li > ol,
+article > ol > li > ol,
+main > ol > li > ul,
+article > ol > li > ul {
+  list-style: none;
+  display: none;
+  padding-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  border-left: 4px solid #3ac4bb;
+  cursor: auto;
+  /* Third and final OL */
+}
+main > ol > li > ol h2,
+article > ol > li > ol h2,
+main > ol > li > ul h2,
+article > ol > li > ul h2 {
+  color: #3ac4bb;
+}
+main > ol > li > ol h4,
+article > ol > li > ol h4,
+main > ol > li > ul h4,
+article > ol > li > ul h4 {
+  display: inline-block;
+  border-bottom: 6px #c0bfc6 solid;
+  margin-bottom: 12px;
+}
+main > ol > li > ol > li > ol,
+article > ol > li > ol > li > ol,
+main > ol > li > ul > li > ol,
+article > ol > li > ul > li > ol,
+main > ol > li > ol > li > ul,
+article > ol > li > ol > li > ul,
+main > ol > li > ul > li > ul,
+article > ol > li > ul > li > ul {
+  padding-left: 20px;
+  list-style: disc;
+}
+main > ol > li > ul,
+article > ol > li > ul {
+  list-style: disc;
+  padding-left: 30px;
+  border-left: 0;
+}
+main.program #featured-image {
+  position: relative;
+  line-height: 0;
+  margin-bottom: 25px;
+  width: 100%;
+  height: 590px;
+  background-size: cover;
+  background-position: center center;
+}
+main.program #featured-image h1 {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+}
+main.program h1 {
+  text-transform: uppercase;
+  background: #3ac4bb;
+  color: #fff;
+  padding: 12px 22px 1px 71px;
+  display: inline-block;
+  margin-bottom: 25px;
+}
+/* ----------------------------------------------------------------------------------------------------------
+08 Program Tiles --------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+#programs {
+  display: block;
+  width: 100.92592593%;
+  margin: 0 -0.46296296%;
+  *zoom: 1;
+  padding-top: 10px;
+}
+#programs:before,
+#programs:after {
+  content: "";
+  display: table;
+}
+#programs:after {
+  clear: both;
+}
+#programs h1 {
+  text-align: center;
+  padding-bottom: 30px;
+}
+#programs-tile {
+  display: inline;
+  float: left;
+  width: 32.40740741%;
+  margin: 0 0.46296296%;
+  margin-bottom: 1.1904762%;
+  height: 140px;
+  position: relative;
+}
+#programs-tile:hover {
+  background: #939b9e !important;
+}
+#programs-tile-content {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+}
+#programs-tile-content h2 {
+  display: table-caption;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 51.75px;
+  font-size: 36px;
+  font-size: 3.6rem;
+  line-height: 1;
+  text-align: left;
+  vertical-align: middle;
+  padding-left: 80px;
+  padding-bottom: 0;
+  margin: 30px 0;
+}
+#programs-tile:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em;
+  /* Adjusts for spacing */
+}
+/* ----------------------------------------------------------------------------------------------------------
+09 Footer ---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+#footer-clear {
+  clear: both;
+  padding-top: 70px;
+}
+footer {
+  width: 100%;
+  background: #4f4f4f;
+  color: #fff;
+  overflow: auto;
+  padding: 42px 0;
+}
+footer p {
+  color: #fff;
+}
+footer a {
+  color: #fff;
+}
+footer a:hover {
+  color: #3ac4bb;
+  text-decoration: none;
+}
+#footer-contact {
+  display: inline;
+  float: left;
+  width: 24.30555556%;
+  margin: 0 0.34722222%;
+  margin-left: 12.84722222%;
+}
+#footer-social {
+  display: inline;
+  float: left;
+  width: 24.30555556%;
+  margin: 0 0.34722222%;
+}
+#footer-social-icons {
+  line-height: 34.5px;
+  font-size: 24px;
+  font-size: 2.4rem;
+  float: left;
+}
+#footer-social-icons span {
+  display: block;
+  padding-bottom: 5px;
+}
+#footer-social-events {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  border-left: 1px #fff solid;
+  padding-left: 20px;
+  margin-left: 50px;
+}
+#footer-social-events li {
+  list-style: none;
+}
+#footer-social-events p {
+  line-height: 18.6875px;
+  font-size: 13px;
+  font-size: 1.3rem;
+}
+#footer-social-facebook {
+  display: none;
+}
+#footer-social-twitter {
+  display: none;
+}
+#footer-right {
+  display: inline;
+  float: left;
+  width: 24.30555556%;
+  margin: 0 0.34722222%;
+}
+/* ----------------------------------------------------------------------------------------------------------
+10 Media queries --------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+/* 400 and up */
+@media screen and (min-width: 400px) {
+  /* Place your styles here for all widths greater than 400px */
+}
+/* Retina Display */
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+  /* Place your styles here for all 'Retina' screens */
+}
+/* ----------------------------------------------------------------------------------------------------------
+11 Misc & mixens --------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+.icon {
+  -webkit-transition: color 250ms;
+  -moz-transition: color 250ms;
+  -ms-transition: color 250ms;
+  -o-transition: color 250ms;
+}

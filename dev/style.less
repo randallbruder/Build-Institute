@@ -1,0 +1,725 @@
+/*
+Theme Name:		Build Institute
+Theme URI:		http://buildinstitute.com
+Description:		A custom Wordpress theme designed and coded for the Build Institute.
+Version:			1.0
+Author:			Randall Bruder
+Author URI:		http://randallbruder.com
+Tags:			build, detroit
+*/
+
+@import "css/reset.css";
+@import "css/sidebarEffects.css";
+@import "css/jquery.selectbox.css";
+@import "css/jquery.lightSlider.css";
+@import "grid.less";
+@import "fonts.less";
+
+/*
+===========================
+CONTENTS:
+
+01 Sensible defaults
+02 LESS Variables
+03 Semantic Grid System
+04 Header
+05 Search/Newsletter Reveal
+06 Menu Styles
+07 Main Content
+08 Program Tiles
+09 Footer
+10 Media queries
+11 Misc & mixens
+===========================
+*/
+
+/* ----------------------------------------------------------------------------------------------------------
+01 Sensible defaults ----------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+div,
+article,
+section,
+header,
+footer,
+nav,
+li					{ position:relative; /* For absolutely positioning elements within containers (add more to the list if need be) */ }
+.group:after 		{ display:block; height:0; clear:both; content:"."; visibility:hidden; /* For clearing */ }
+body 				{ background: @bg-color; /* Don't forget to style your body to avoid user overrides */ }
+::-moz-selection 	{ background:@accent-color; color:#fff; }
+::selection 			{ background:@accent-color; color:#fff; }
+
+/* ----------------------------------------------------------------------------------------------------------
+02 LESS Variables -------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+@body-font:		"Intro", Helvetica, Arial, sans-serif;		// Body Font family
+@heading-font:	"BrixSlab", Georgia, serif;				// Heading font family
+
+@body-text-size:	16px;		// Body text size
+
+@accent-color:	#3ac4bb;		// Site accent color
+@text-color:		#636363;		// Site Text color
+@menu-color:		#939b9e;
+@bg-color: 		#f0efef;		// Site background color
+
+
+body, input, textarea, p {
+	font-family: @body-font;
+	.font-size(@body-text-size);
+	color: @text-color;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+	font-family: @heading-font;
+	.font-smoothing();
+	letter-spacing: 0.5px;
+}
+
+h1 { .font-size(50px); padding-bottom: 10px; }
+h2 { .font-size(30px); padding-bottom: 10px; }
+h3 { .font-size(24px); padding-bottom: 10px; }
+h4 { .font-size(16px); font-weight: bold; }
+
+/* ----------------------------------------------------------------------------------------------------------
+03 Semantic Grid System -------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+/* GRID */
+
+// Specify the number of columns and set column and gutter widths
+@columns: 16;
+@column-width: 80;
+@gutter-width: 10;
+
+// Remove the definition below for a pixel-based layout
+@total-width: 100%;
+
+
+/* ----------------------------------------------------------------------------------------------------------
+04 Header ---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+header {
+	position: relative;
+	& #site-logo {
+		float: left;
+		z-index: 100;
+	}
+}
+
+#header-homepage {
+	height: 590px;
+
+	/* background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url('img/header.jpg') no-repeat center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover; */
+}
+
+
+/* Some jquery.lightSlider.min.js overrided styles (I'm sorry) */
+.csSlideOuter {
+	height: 590px;
+	position: absolute;
+	width: 100%;
+}
+.csSlideOuter .csPager.cSpg { margin: -30px 0 0; }
+.csSlideOuter .csPager.cSpg > li:hover a, .csSlideOuter .csPager.cSpg > li.active a { background-color: @accent-color; }
+.csSlideWrapper { height: 590px !important; }
+.lightSlider { padding-bottom: 300px !important; }
+/* Okay, we're back to our regularly scheduled CSS */
+
+#header-slider {
+	width: 100%;
+	& li {
+		height: 590px;
+		position: absolute;
+		list-style-type: none;
+		& h1 {
+			line-height: 1.05;
+			.column(10);
+			.push(2);
+			padding-bottom: 20px;
+			color: #fff;
+			padding-top: 225px;
+		}
+		& p {
+			.column(8);
+			.push(2);
+			color: #fff;
+		}
+	}
+	& a {
+		color: #fff;
+		&:hover {
+			color: @accent-color;
+			text-decoration: none;
+		}
+	}
+}
+
+#header-content {
+	
+	.column(12);
+	.push(2);
+	.pull(2);
+	
+	padding-top: 25px;
+}
+
+/* ----------------------------------------------------------------------------------------------------------
+05 Search/Newsletter Reveal ---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+.st-menu, #newsletter-sucess {
+	.column(12);
+	.push(2);
+}
+
+.st-menu form {
+	.row(12);
+}
+
+.st-menu input[type='text'], .st-menu input[type='email']{
+	.font-size(32px);
+	color: @accent-color;
+	font-style: italic;
+	padding-top: 21px;
+	float: left;
+	&:focus {
+		outline: 0;
+	}
+}
+
+.st-menu p {
+	float: right;
+	padding-top: 34px;
+}
+
+.newsletter-select {
+	display: inline-block;
+	& label {
+		display: inline-block;
+		/* background: #ccc; */
+		padding: 5px 12px 2px 0;
+		cursor: pointer;
+	}
+}
+
+#newsletter-options {
+	.column(4,12);
+	padding-top: 21px;
+	float: left;
+}
+
+#mc-embedded-subscribe {
+	float: right;
+	.font-size(@body-text-size);
+	border: 3px solid @accent-color;
+	padding: 5px 13px 0 !important;
+	margin-top: 26px !important;
+	outline: 0;
+	cursor: pointer;
+}
+
+input[type="checkbox"] {
+	display:none;
+}
+
+.st-menu input[type="email"] { .column(5,12); }
+.st-menu input[type="text"] { .column(7,12); }
+
+.st-menu input[type="checkbox"] + label:before {
+	font-family: 'Icons';
+	content: '';
+	display:inline-block;
+	width:19px;
+	height:19px;
+	background: #ccc;
+	margin-right: 7px;
+	margin-bottom: -3px;
+	overflow: hidden;
+	text-align: center;
+	line-height: 1.2;
+}
+.st-menu input[type="checkbox"]:checked + label {
+	color: @accent-color;
+	&:before {
+		/* background: @accent-color; */
+		content: '\e805';
+		color: #fff;
+		background: @accent-color;
+	}
+}
+
+#newsletter-sucess {
+	display: none;
+	.font-size(32px);
+	font-style: italic;
+	& p {
+		float: left;
+	}
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------
+06 Menu Styles ----------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+
+/* A ghost button menu? */
+/* 2spooky4me */
+
+.site-navigation {
+	float: right;
+	display: inline-block;
+	padding-top: 15px;
+	z-index: 100;
+}
+
+.menu-primary-container, #menu-primary {
+	display: inline;
+}
+
+#menu-primary > li {
+	display: inline-block;
+	position: relative;
+}
+
+#menu-primary li a {
+  display: inline-block;
+  margin: 0 0 0 8px;
+  padding: 6px 16px 3px 15px;
+  .font-size(@body-text-size);
+  line-height: 1.8;
+  appearance: none;
+  box-shadow: none;
+  border-radius: 0;
+  
+  background: rgba(0,0,0,0);
+  text-decoration: none;
+  
+  color: @menu-color;
+  
+}
+
+#menu-primary > li:hover > a, .sub-menu li a  {
+  border: solid 3px @menu-color;
+  padding: 3px 13px 0 12px !important;
+}
+
+.sub-menu {
+	display: none;
+	position: absolute;
+	white-space: nowrap;
+	top: 34px; /* this should be the same height as the top level menu -- height + padding + borders */
+	& ul {
+		list-style: none;
+	}
+	& li {
+		display: block;
+		margin-bottom: -3px;
+		
+		& a {
+			background: @bg-color !important;
+			&:hover {
+				background: @menu-color !important;
+				color: #fff !important;
+			}
+		}
+	}
+}
+
+#menu-primary li:hover > .sub-menu {
+	display: block; /* show sub menus when hovering over a parent */
+}
+
+/* Homepage Overrides */
+#header-homepage #menu-primary li a { color: #fff; background: none !important; }
+#header-homepage #menu-primary .sub-menu li a:hover { background: #fff !important; color: #000 !important; }
+#header-homepage #menu-primary > li:hover > a, #header-homepage .sub-menu li a  { border: solid 3px #fff; }
+
+/* Styling for the search/newsletter icons */
+
+#st-trigger-effects {
+	display: inline;
+	position: relative;
+	top: -5px;
+	& div {
+		padding-left: 20px;
+		display: inline-block;
+		color: @menu-color;
+		cursor: pointer;
+		.font-size(22px);
+		.transition(color 250ms);
+	
+		&:hover {
+			color: @accent-color;
+		}
+	}
+}
+
+/* Another homepage override */
+#header-homepage #st-trigger-effects div {
+	color: #fff;
+	&:hover {
+		color: @accent-color;
+		}
+	}
+
+
+
+/* ----------------------------------------------------------------------------------------------------------
+07 Main Content ---------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+main {
+	.column(12);
+	.push(2);
+	margin-top: 45px;
+}
+
+#homepage-content {
+	.column(8);
+	.push(4);
+	& h2 {
+		text-align: center;
+		margin-top: 60px;
+		margin-bottom: 20px;
+	}
+}
+
+main {
+
+	/* Standards */
+	& p, & ul {
+		margin-bottom: @body-text-size * 1.2;
+	}
+	& li {
+		margin-bottom: @body-text-size * 0.4;
+	}
+	ul {
+		padding-left: 20px;
+	}
+	& img {
+		max-width: 100%;
+		height: auto;
+	}
+	& > article > p:first-of-type {
+		.font-size(30px);
+		font-family: @heading-font;
+		padding-left: 25px;
+		border-left: 13px solid #000;
+	}
+	& blockquote {
+		.push(1);
+		.pull(1);
+	}
+	& a {
+		color: @accent-color;
+		&:hover {
+			color: @accent-color;
+			text-decoration: none;
+		}
+	}
+	& hr {
+	  border: 0;
+	  color: #ccc;
+	  background-color: #ccc;
+	  height: 6px;
+	  clear: both;
+	}
+	
+	& .alignleft {
+		float: left;
+		padding: 10px 20px 25px 0;
+	}
+	& .alignright {
+		float: right;
+		padding: 10px 0 25px 20px;
+	}
+}
+
+.profile p:first-of-type {
+	.font-size(@body-text-size);
+	padding-left: 0 !important;
+	border-left: none !important;
+	font-family: @body-font !important;
+}
+
+/* LIST STYLES */
+main, article {
+	/* First OL */
+	& > ol {
+		list-style: none;
+		& > li {
+			padding-left: 20px;
+			background: url('img/arrow-right.svg') no-repeat left 2px;
+			background-size: 15px 15px;
+			cursor: pointer;
+			
+			&.active {
+				background: url('img/arrow-down.svg') no-repeat left 2px;
+				background-size: 15px 15px;
+			}
+			& h2, & h3, & h4 {
+				padding-bottom: 0 !important;
+			}
+			
+			/* This is messed up, but at least it fixes the placement of the arrow if h2, h3, h4 styles are used. */
+			& h2 {
+				position: relative;
+				top: -10px;
+			}
+			& h3 {
+				position: relative;
+				top: -6px;
+			}
+			& h4 {
+				position: relative;
+				top: -2px;
+			}
+		}
+		
+		/* Second OL */
+		& > li > ol, & > li > ul {
+			list-style: none;
+			display: none;
+			padding-left: 20px;
+			margin-top: 10px;
+			margin-bottom: 30px;
+			border-left: 4px solid @accent-color;
+			cursor: auto;
+			
+			& h2 {
+				color: @accent-color;
+			}
+			& h4 {
+				display: inline-block;
+				border-bottom: 6px #c0bfc6 solid;
+				margin-bottom: 12px;
+			}
+			
+			/* Third and final OL */
+			& > li > ol, & > li > ul {
+				padding-left: 20px;
+				list-style: disc;
+			}
+		}
+		& > li > ul {
+			list-style: disc;
+			padding-left: 30px;
+			border-left: 0;
+		}
+	}
+	
+}
+
+main.program {
+	& #featured-image {
+		position: relative;
+		line-height: 0;
+		margin-bottom: 25px;
+		width: 100%;
+		height: 590px;
+		background-size: cover;
+		background-position: center center;
+		& h1 {
+			position: absolute;
+			bottom: -25px;
+			left: 0;
+		}
+	}
+	& h1 {
+		text-transform: uppercase;
+		background: @accent-color;
+		color: #fff;
+		padding: 12px 22px 1px 71px;
+		display: inline-block;
+		margin-bottom: 25px;
+	}
+}
+/* ----------------------------------------------------------------------------------------------------------
+08 Program Tiles --------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+#programs {
+	.row(12);
+	padding-top: 10px;
+	& h1 {
+		text-align: center;
+		padding-bottom: 30px;
+	}
+	&-tile {
+		.column(4,12);
+		margin-bottom: 1.1904762%;
+		height: 140px;
+		position: relative;
+		&:hover{
+			background: @menu-color !important;
+		}
+		&-content {
+			display: inline-block;
+			
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			-ms-transform: translate(-50%, -50%);
+			-webkit-transform: translate(-50%, -50%);
+			
+			& h2 {
+				display: table-caption;
+				text-transform: uppercase;
+				color: #fff;
+				.font-size(36px);
+				line-height: 1;
+				text-align: left;
+				vertical-align: middle;
+				padding-left: 80px;
+				padding-bottom: 0;
+				margin: 30px 0;
+			}
+		}
+		&:before{
+			content: '';
+			display: inline-block;
+			height: 100%;
+			vertical-align: middle;
+			margin-right: -0.25em; /* Adjusts for spacing */
+		}
+	}
+	
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------
+09 Footer ---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+#footer-clear {
+	clear: both;
+	padding-top: 70px;
+}
+
+footer {
+	width: 100%;
+	background: #4f4f4f;
+	color: #fff;
+	overflow: auto;
+	padding: 42px 0;
+	& p {
+		color: #fff;
+	}
+	& a {
+		color: #fff;
+		&:hover {
+			color: @accent-color;
+			text-decoration: none;
+		}
+	}
+}
+
+#footer-contact {
+	.column(4);
+	.push(2);
+}
+#footer-social {
+	.column(4);
+	&-icons {
+		.font-size(24px);
+		float: left;
+		& span {
+			display: block;
+			padding-bottom: 5px;
+		}
+	}
+	&-events {
+		.font-smoothing();
+		border-left: 1px #fff solid;
+		padding-left: 20px;
+		margin-left: 50px;
+		& li {
+			list-style: none;
+		}
+		& p {
+			.font-size(13px);
+		}
+	}
+	&-facebook {
+		display: none;
+	}
+	&-twitter {
+		display: none;
+	}
+}
+#footer-right {
+	.column(4);
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------
+10 Media queries --------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+/* 400 and up */
+@media screen and (min-width:400px) {
+
+					 /* Place your styles here for all widths greater than 400px */
+
+}
+
+/* Retina Display */
+@media screen and (-webkit-min-device-pixel-ratio:2) {
+
+					 /* Place your styles here for all 'Retina' screens */
+					 
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------
+11 Misc & mixens --------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+.icon {
+	.transition(color 250ms);
+}
+
+.font-size(@size){
+	@rem-value: (@size / 10);
+	@px-value: @size;
+	@lineHeight: (@size * 1.4375);
+	line-height: @lineHeight;
+	font-size: unit(@px-value,px);
+	font-size: unit(@rem-value,rem);
+}
+
+.font-smoothing(){
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.transition (@transition) {
+	-webkit-transition: @transition;
+	-moz-transition:    @transition;
+	-ms-transition:     @transition;
+	-o-transition:      @transition;
+}
+
+.icon(@icon) {
+	font-family: 'Icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	display: inline-block;
+	vertical-align: bottom;
+	font-size: 1.2em;
+	-webkit-font-smoothing: antialiased;
+	content: @icon;
+}

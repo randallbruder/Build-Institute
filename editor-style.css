@@ -1,0 +1,5 @@
+body#tinymce.wp-editor hr {
+    clear: both;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}

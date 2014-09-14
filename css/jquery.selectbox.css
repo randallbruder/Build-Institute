@@ -1,0 +1,68 @@
+@CHARSET "UTF-8";
+.sbHolder{
+	border-bottom: dashed 3px #3ac4bb;
+	font-weight: normal;
+	height: 30px;
+	position: relative;
+	width: 200px;
+	
+	float: left;
+	margin-top: 28px;
+}
+.sbHolder:focus {
+	outline: none;
+}
+.sbSelector{
+	display: block;
+	height: 30px;
+	left: 0;
+	line-height: 30px;
+	outline: none;
+	/* overflow: hidden; */
+	position: absolute;
+	text-indent: 10px;
+	top: 0;
+	width: 200px;
+}
+.sbSelector:link, .sbSelector:visited, .sbSelector:hover{
+	color: #3ac4bb;
+	outline: none;
+	text-decoration: none;
+}
+
+
+.sbOptions{
+	background-color: #eee;
+	/* border: solid 1px #515151; */
+	list-style: none;
+	left: -1px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 30px;
+	width: 200px;
+	z-index: 1;
+	overflow-y: auto;
+}
+.sbOptions li{
+	padding: 0 7px;
+}
+.sbOptions a{
+	/* border-bottom: dotted 1px #515151; */
+	display: block;
+	outline: none;
+	padding: 7px 0 7px 3px;
+}
+.sbOptions a:link, .sbOptions a:visited{
+	color: #000;
+	text-decoration: none;
+}
+.sbOptions li:hover,
+.sbOptions li:focus,
+.sbOptions li.sbFocus{
+	background: #3ac4bb;
+	color: #fff;
+}
+.sbOptions li.last a{
+	border-bottom: none;
+}
