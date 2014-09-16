@@ -456,6 +456,10 @@ main, article {
 			background: url('img/arrow-right.svg') no-repeat left 2px;
 			background-size: 15px 15px;
 			cursor: pointer;
+			& h3:hover, & h2:hover, & h1:hover, & strong:hover {
+				color: @accent-color;
+				text-decoration: underline;
+			}
 			
 			&.active {
 				background: url('img/arrow-down.svg') no-repeat left 2px;
@@ -605,6 +609,7 @@ main.program {
 
 #profiles {
 	.row(12);
+	padding-bottom: 40px;
 }
 
 .profiles-single {

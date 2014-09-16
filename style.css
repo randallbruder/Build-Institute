@@ -677,6 +677,17 @@ article > ol > li {
   cursor: pointer;
   /* This is messed up, but at least it fixes the placement of the arrow if h2, h3, h4 styles are used. */
 }
+main > ol > li h3:hover,
+article > ol > li h3:hover,
+main > ol > li h2:hover,
+article > ol > li h2:hover,
+main > ol > li h1:hover,
+article > ol > li h1:hover,
+main > ol > li strong:hover,
+article > ol > li strong:hover {
+  color: #3ac4bb;
+  text-decoration: underline;
+}
 main > ol > li.active,
 article > ol > li.active {
   background: url('img/arrow-down.svg') no-repeat left 2px;
@@ -855,6 +866,7 @@ main.program h1 {
   margin-left: -0.46296296%;
   margin-right: -0.46296296%;
   *zoom: 1;
+  padding-bottom: 40px;
 }
 #profiles:before,
 #profiles:after {
