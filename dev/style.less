@@ -27,9 +27,11 @@ CONTENTS:
 06 Menu Styles
 07 Main Content
 08 Program Tiles
-09 Footer
-10 Media queries
-11 Misc & mixens
+09 Grad Profile Grid
+10 Grad Profile Single
+11 Footer
+12 Media queries
+13 Misc & mixens
 ===========================
 */
 
@@ -81,6 +83,8 @@ h1 { .font-size(50px); padding-bottom: 10px; }
 h2 { .font-size(30px); padding-bottom: 10px; }
 h3 { .font-size(24px); padding-bottom: 10px; }
 h4 { .font-size(16px); font-weight: bold; }
+
+h1, h2, h3 { & b, & strong { font-weight: normal; } }
 
 /* ----------------------------------------------------------------------------------------------------------
 03 Semantic Grid System -------------------------------------------------------------------------------------
@@ -162,7 +166,6 @@ header {
 }
 
 #header-content {
-	
 	.column(12);
 	.push(2);
 	.pull(2);
@@ -443,13 +446,6 @@ main {
 	}
 }
 
-.profile p:first-of-type {
-	.font-size(@body-text-size);
-	padding-left: 0 !important;
-	border-left: none !important;
-	font-family: @body-font !important;
-}
-
 /* LIST STYLES */
 main, article {
 	/* First OL */
@@ -542,6 +538,14 @@ main.program {
 		margin-bottom: 25px;
 	}
 }
+
+.wp-caption-text {
+	.font-size(12px);
+	color: @accent-color;
+	font-weight: bold;
+	font-style: italic;
+}
+
 /* ----------------------------------------------------------------------------------------------------------
 08 Program Tiles --------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
@@ -595,9 +599,123 @@ main.program {
 	
 }
 
+/* ----------------------------------------------------------------------------------------------------------
+09 Grad Profile Grid ----------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+#profiles {
+	.row(12);
+}
+
+.profiles-single {
+	.column(4,12);
+	
+	margin-bottom: 10px;
+	position: relative;
+	
+	& .profiles-thumb {
+		width: 100%;
+		height: 300px;
+		background-size: cover;
+		background-position: center center;
+	}
+	& .profiles-title {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		padding: 14px 17px 9px 17px;
+		background: rgba(100, 100, 100, .7);
+		.transition(background-color 250ms);
+	}
+	&:hover .profiles-title {
+		background: @accent-color !important;
+	}
+	& h2, & h3 {
+		color: #fff;
+		padding-bottom: 0;
+		line-height: 1;
+	}
+	& h3 {
+		text-transform: uppercase;
+		.font-size(16px);
+	}
+}
 
 /* ----------------------------------------------------------------------------------------------------------
-09 Footer ---------------------------------------------------------------------------------------------------
+10 Grad Profile Single --------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+article.profile {
+	.row(12);
+	& > #profile-content > p:last-child {
+		padding-bottom: 50px;
+		border-bottom: 16px solid @accent-color;
+		&:after {
+			content: '';
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			background-color: @accent-color;
+			margin-left: 5px;
+		}
+		&.no-after:after{
+			display: none;
+		}
+	}
+}
+
+#profile {
+	&-featured-image {
+		.column(10,12);
+		.push(2,12);
+		height: 450px;
+		background-size: cover;
+		background-position: center center;
+	}
+	&-title {
+		.column(10,12);
+		.pull(2,12);
+		position: relative;
+		top: -50px;
+		margin-bottom: -50px;
+		& h1, & h2 {
+			display: inline-block;
+			background: @bg-color;
+		}
+		& h1 {
+			padding: 9px 28px 0 0;
+			color: @accent-color;
+			margin-bottom: -10px;
+		}
+		& h2 {
+			text-transform: uppercase;
+		}
+	}
+	&-content {
+		& > p, & h1, & h2, & h3 {
+			.column(10,12);
+			.push(2,12);
+		}
+		& > p, & h1, & h2, & h3, & h4, & blockquote {
+			float: none !important;
+			display: block !important;
+		}
+		& blockquote {
+			.column(7,12);
+			.push(0);
+			text-indent: -1.3em;
+			& p {
+				color: @accent-color;
+				.font-size(36px);
+				line-height: 42px;
+				font-weight: 900;
+			}
+		}
+	}
+}
+
+/* ----------------------------------------------------------------------------------------------------------
+11 Footer ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 
 #footer-clear {
@@ -662,7 +780,7 @@ footer {
 
 
 /* ----------------------------------------------------------------------------------------------------------
-10 Media queries --------------------------------------------------------------------------------------------
+12 Media queries --------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 
 /* 400 and up */
@@ -681,7 +799,7 @@ footer {
 
 
 /* ----------------------------------------------------------------------------------------------------------
-11 Misc & mixens --------------------------------------------------------------------------------------------
+13 Misc & mixens --------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 
 .icon {
@@ -702,7 +820,7 @@ footer {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.transition (@transition) {
+.transition(@transition) {
 	-webkit-transition: @transition;
 	-moz-transition:    @transition;
 	-ms-transition:     @transition;

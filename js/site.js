@@ -39,7 +39,7 @@ jQuery(document).ready(function($) {
 		
 		var color;
 		
-		$("a, h2").each(function () {
+		$("a, h1, h2, h3, p").each(function () {
 			color = $(this).css("color");
 			if (color == "rgb(58, 196, 187)") {
 				$(this).css("color", $("#program-color").css("color"));
@@ -53,6 +53,17 @@ jQuery(document).ready(function($) {
 			}
 		});
 		
+		$("p").each(function () {
+			var borderbottom = $(this).css("border-bottom-color");
+			if (borderbottom == "rgb(0, 0, 0)" || borderbottom == "rgb(58, 196, 187)") {
+				$(this).css("border-bottom-color", $("#program-color").css("color"));
+			}
+		});
+		
+		
+		$("article.profile > #profile-content > p:last-child").addClass('no-after');
+		$("article.profile > #profile-content > p:last-child").append('<div style="display: inline-block; width: 10px; height: 10px; background-color: ' + $("#program-color").css("color") + '; margin-left: 5px;"></div>');
+		
 		$(".icon").hover(function() {
 		  color = $(this).css("color");
 		  $(this).css("color", $("#program-color").css("color"));
@@ -60,8 +71,8 @@ jQuery(document).ready(function($) {
 			$(this).css("color", color);
 		});
 		
-		var highlightHTML = "<style>::selection{background-color:" + $("#program-color").css("color") + " !important;}::-moz-selection{background-color:" + $("#program-color").css("color") + "!important;}</style>";
-		
+		var highlightHTML = "<style>::selection{background-color:" + $("#program-color").css("color") +
+						   " !important;}::-moz-selection{background-color:" + $("#program-color").css("color") + "!important;}</style>";
 		$(highlightHTML).insertAfter("body *:last");
 
 		

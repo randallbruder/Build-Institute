@@ -16,16 +16,36 @@
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
 <article class="profile">
-
-	<h1><?php the_title(); ?></h1>
 	
-	<?php the_content(); ?>
-
-	<?php if ( get_the_author_meta( 'description' ) ) : ?>
-	<?php echo get_avatar( get_the_author_meta( 'user_email' ) ); ?>
-	<h3>About <?php echo get_the_author() ; ?></h3>
-	<?php the_author_meta( 'description' ); ?>
+	<?php
+		$related_post = get_custom_field('graduated_from:get_post');
+		$program_color = $related_post['program_color'];
+		if ($program_color  != ''):
+	 ?>
+		<div id="program-color" style="display: none; color: #<?php echo $program_color ?>;"></div>
 	<?php endif; ?>
+	
+	<?php if (has_post_thumbnail( $post->ID ) ): ?>
+		<?php $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' ); ?>
+	
+		<div id="profile-featured-image" style="background-image: url('<?php echo $image[0]; ?>')"></div>
+		<div id="profile-title">
+			<h1><?php the_title(); ?></h1><br />
+			<h2><?php print_custom_field('associated_company'); ?></h2>
+		</div>
+	
+		<?php else: ?>
+	
+		<div id="profile-title">
+			<h1><?php the_title(); ?></h1><br />
+			<h2><?php print_custom_field('associated_company'); ?></h2>
+		</div>
+	
+		<?php endif; ?>
+	
+	<div id="profile-content">
+		<?php the_content(); ?>
+	</div>
 
 </article>
 <?php endwhile; ?>

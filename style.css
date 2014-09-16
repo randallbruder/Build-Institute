@@ -82,6 +82,20 @@ body:after {
   font-weight: normal;
   font-style: italic;
 }
+@font-face {
+  font-family: 'Intro';
+  src: url('fonts/IntroBlack.eot');
+  src: url('fonts/IntroBlack.eot?#iefix') format('embedded-opentype'), url('fonts/IntroBlack.woff') format('woff'), url('fonts/IntroBlack.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Intro';
+  src: url('fonts/IntroBlackItalic.eot');
+  src: url('fonts/IntroBlackItalic.eot?#iefix') format('embedded-opentype'), url('fonts/IntroBlackItalic.woff') format('woff'), url('fonts/IntroBlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
 /* Icon Webfont */
 @font-face {
   font-family: 'Icons';
@@ -159,9 +173,11 @@ CONTENTS:
 06 Menu Styles
 07 Main Content
 08 Program Tiles
-09 Footer
-10 Media queries
-11 Misc & mixens
+09 Grad Profile Grid
+10 Grad Profile Single
+11 Footer
+12 Media queries
+13 Misc & mixens
 ===========================
 */
 /* ----------------------------------------------------------------------------------------------------------
@@ -243,6 +259,14 @@ h4 {
   font-size: 1.6rem;
   font-weight: bold;
 }
+h1 b,
+h2 b,
+h3 b,
+h1 strong,
+h2 strong,
+h3 strong {
+  font-weight: normal;
+}
 /* ----------------------------------------------------------------------------------------------------------
 03 Semantic Grid System -------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
@@ -298,7 +322,8 @@ header #site-logo {
   display: inline;
   float: left;
   width: 61.80555556%;
-  margin: 0 0.34722222%;
+  margin-left: 0.34722222%;
+  margin-right: 0.34722222%;
   margin-left: 12.84722222%;
   padding-bottom: 20px;
   color: #fff;
@@ -308,7 +333,8 @@ header #site-logo {
   display: inline;
   float: left;
   width: 49.30555556%;
-  margin: 0 0.34722222%;
+  margin-left: 0.34722222%;
+  margin-right: 0.34722222%;
   margin-left: 12.84722222%;
   color: #fff;
 }
@@ -323,7 +349,8 @@ header #site-logo {
   display: inline;
   float: left;
   width: 74.30555556%;
-  margin: 0 0.34722222%;
+  margin-left: 0.34722222%;
+  margin-right: 0.34722222%;
   margin-left: 12.84722222%;
   margin-right: 12.84722222%;
   padding-top: 25px;
@@ -336,13 +363,15 @@ header #site-logo {
   display: inline;
   float: left;
   width: 74.30555556%;
-  margin: 0 0.34722222%;
+  margin-left: 0.34722222%;
+  margin-right: 0.34722222%;
   margin-left: 12.84722222%;
 }
 .st-menu form {
   display: block;
   width: 100.92592593%;
-  margin: 0 -0.46296296%;
+  margin-left: -0.46296296%;
+  margin-right: -0.46296296%;
   *zoom: 1;
 }
 .st-menu form:before,
@@ -383,7 +412,8 @@ header #site-logo {
 #newsletter-options {
   display: inline;
   width: 32.40740741%;
-  margin: 0 0.46296296%;
+  margin-left: 0.46296296%;
+  margin-right: 0.46296296%;
   padding-top: 21px;
   float: left;
 }
@@ -405,13 +435,15 @@ input[type="checkbox"] {
   display: inline;
   float: left;
   width: 40.74074074%;
-  margin: 0 0.46296296%;
+  margin-left: 0.46296296%;
+  margin-right: 0.46296296%;
 }
 .st-menu input[type="text"] {
   display: inline;
   float: left;
   width: 57.40740741%;
-  margin: 0 0.46296296%;
+  margin-left: 0.46296296%;
+  margin-right: 0.46296296%;
 }
 .st-menu input[type="checkbox"] + label:before {
   font-family: 'Icons';
@@ -558,7 +590,8 @@ main {
   display: inline;
   float: left;
   width: 74.30555556%;
-  margin: 0 0.34722222%;
+  margin-left: 0.34722222%;
+  margin-right: 0.34722222%;
   margin-left: 12.84722222%;
   margin-top: 45px;
 }
@@ -566,7 +599,8 @@ main {
   display: inline;
   float: left;
   width: 49.30555556%;
-  margin: 0 0.34722222%;
+  margin-left: 0.34722222%;
+  margin-right: 0.34722222%;
   margin-left: 25.34722222%;
 }
 #homepage-content h2 {
@@ -624,14 +658,6 @@ main .alignleft {
 main .alignright {
   float: right;
   padding: 10px 0 25px 20px;
-}
-.profile p:first-of-type {
-  line-height: 23px;
-  font-size: 16px;
-  font-size: 1.6rem;
-  padding-left: 0 !important;
-  border-left: none !important;
-  font-family: "Intro", Helvetica, Arial, sans-serif !important;
 }
 /* LIST STYLES */
 main,
@@ -745,13 +771,22 @@ main.program h1 {
   display: inline-block;
   margin-bottom: 25px;
 }
+.wp-caption-text {
+  line-height: 17.25px;
+  font-size: 12px;
+  font-size: 1.2rem;
+  color: #3ac4bb;
+  font-weight: bold;
+  font-style: italic;
+}
 /* ----------------------------------------------------------------------------------------------------------
 08 Program Tiles --------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 #programs {
   display: block;
   width: 100.92592593%;
-  margin: 0 -0.46296296%;
+  margin-left: -0.46296296%;
+  margin-right: -0.46296296%;
   *zoom: 1;
   padding-top: 10px;
 }
@@ -771,7 +806,8 @@ main.program h1 {
   display: inline;
   float: left;
   width: 32.40740741%;
-  margin: 0 0.46296296%;
+  margin-left: 0.46296296%;
+  margin-right: 0.46296296%;
   margin-bottom: 1.1904762%;
   height: 140px;
   position: relative;
@@ -811,7 +847,171 @@ main.program h1 {
   /* Adjusts for spacing */
 }
 /* ----------------------------------------------------------------------------------------------------------
-09 Footer ---------------------------------------------------------------------------------------------------
+09 Grad Profile Grid ----------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+#profiles {
+  display: block;
+  width: 100.92592593%;
+  margin-left: -0.46296296%;
+  margin-right: -0.46296296%;
+  *zoom: 1;
+}
+#profiles:before,
+#profiles:after {
+  content: "";
+  display: table;
+}
+#profiles:after {
+  clear: both;
+}
+.profiles-single {
+  display: inline;
+  float: left;
+  width: 32.40740741%;
+  margin-left: 0.46296296%;
+  margin-right: 0.46296296%;
+  margin-bottom: 10px;
+  position: relative;
+}
+.profiles-single .profiles-thumb {
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  background-position: center center;
+}
+.profiles-single .profiles-title {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 14px 17px 9px 17px;
+  background: rgba(100, 100, 100, 0.7);
+  -webkit-transition: background-color 250ms;
+  -moz-transition: background-color 250ms;
+  -ms-transition: background-color 250ms;
+  -o-transition: background-color 250ms;
+}
+.profiles-single:hover .profiles-title {
+  background: #3ac4bb !important;
+}
+.profiles-single h2,
+.profiles-single h3 {
+  color: #fff;
+  padding-bottom: 0;
+  line-height: 1;
+}
+.profiles-single h3 {
+  text-transform: uppercase;
+  line-height: 23px;
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+/* ----------------------------------------------------------------------------------------------------------
+10 Grad Profile Single --------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+article.profile {
+  display: block;
+  width: 100.92592593%;
+  margin-left: -0.46296296%;
+  margin-right: -0.46296296%;
+  *zoom: 1;
+}
+article.profile:before,
+article.profile:after {
+  content: "";
+  display: table;
+}
+article.profile:after {
+  clear: both;
+}
+article.profile > #profile-content > p:last-child {
+  padding-bottom: 50px;
+  border-bottom: 16px solid #3ac4bb;
+}
+article.profile > #profile-content > p:last-child:after {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #3ac4bb;
+  margin-left: 5px;
+}
+article.profile > #profile-content > p:last-child.no-after:after {
+  display: none;
+}
+#profile-featured-image {
+  display: inline;
+  float: left;
+  width: 82.40740741%;
+  margin-left: 0.46296296%;
+  margin-right: 0.46296296%;
+  margin-left: 17.12962963%;
+  height: 450px;
+  background-size: cover;
+  background-position: center center;
+}
+#profile-title {
+  display: inline;
+  float: left;
+  width: 82.40740741%;
+  margin-left: 0.46296296%;
+  margin-right: 0.46296296%;
+  margin-right: 17.12962963%;
+  position: relative;
+  top: -50px;
+  margin-bottom: -50px;
+}
+#profile-title h1,
+#profile-title h2 {
+  display: inline-block;
+  background: #f0efef;
+}
+#profile-title h1 {
+  padding: 9px 28px 0 0;
+  color: #3ac4bb;
+  margin-bottom: -10px;
+}
+#profile-title h2 {
+  text-transform: uppercase;
+}
+#profile-content > p,
+#profile-content h1,
+#profile-content h2,
+#profile-content h3 {
+  display: inline;
+  float: left;
+  width: 82.40740741%;
+  margin-left: 0.46296296%;
+  margin-right: 0.46296296%;
+  margin-left: 17.12962963%;
+}
+#profile-content > p,
+#profile-content h1,
+#profile-content h2,
+#profile-content h3,
+#profile-content h4,
+#profile-content blockquote {
+  float: none !important;
+  display: block !important;
+}
+#profile-content blockquote {
+  display: inline;
+  float: left;
+  width: 57.40740741%;
+  margin-left: 0.46296296%;
+  margin-right: 0.46296296%;
+  margin-left: 0.34722222%;
+  text-indent: -1.3em;
+}
+#profile-content blockquote p {
+  color: #3ac4bb;
+  line-height: 51.75px;
+  font-size: 36px;
+  font-size: 3.6rem;
+  line-height: 42px;
+  font-weight: 900;
+}
+/* ----------------------------------------------------------------------------------------------------------
+11 Footer ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 #footer-clear {
   clear: both;
@@ -838,14 +1038,16 @@ footer a:hover {
   display: inline;
   float: left;
   width: 24.30555556%;
-  margin: 0 0.34722222%;
+  margin-left: 0.34722222%;
+  margin-right: 0.34722222%;
   margin-left: 12.84722222%;
 }
 #footer-social {
   display: inline;
   float: left;
   width: 24.30555556%;
-  margin: 0 0.34722222%;
+  margin-left: 0.34722222%;
+  margin-right: 0.34722222%;
 }
 #footer-social-icons {
   line-height: 34.5px;
@@ -882,10 +1084,11 @@ footer a:hover {
   display: inline;
   float: left;
   width: 24.30555556%;
-  margin: 0 0.34722222%;
+  margin-left: 0.34722222%;
+  margin-right: 0.34722222%;
 }
 /* ----------------------------------------------------------------------------------------------------------
-10 Media queries --------------------------------------------------------------------------------------------
+12 Media queries --------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 /* 400 and up */
 @media screen and (min-width: 400px) {
@@ -896,7 +1099,7 @@ footer a:hover {
   /* Place your styles here for all 'Retina' screens */
 }
 /* ----------------------------------------------------------------------------------------------------------
-11 Misc & mixens --------------------------------------------------------------------------------------------
+13 Misc & mixens --------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 .icon {
   -webkit-transition: color 250ms;

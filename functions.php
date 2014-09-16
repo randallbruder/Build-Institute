@@ -26,7 +26,7 @@
 	======================================================================================================================== */
 
 	add_theme_support( 'post-thumbnails' );
-	add_theme_support( 'post-thumbnails', array( 'program' ) );
+	add_theme_support( 'post-thumbnails', array( 'program', 'profile' ) );
 	
 	register_nav_menus(array('primary' => 'Primary Navigation'));
 
@@ -109,7 +109,17 @@
 	   if (have_posts()) :
 	   	$return_string .= '<div id="profiles">';
 		while (have_posts()) : the_post();
-			$return_string .= '<a href="'.get_permalink().'"><h2>'.get_the_title().'</h2></a>';
+			
+			if (has_post_thumbnail( $post->ID ) ):
+				$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+			endif;
+			
+			$post = get_custom_field('graduated_from:get_post');
+			$program_color = $post['program_color'];
+			
+			list($r, $g, $b) = sscanf($program_color, "%02x%02x%02x");
+			
+			$return_string .= '<div class="profiles-single"><a href="'.get_permalink().'"><div class="profiles-thumb" style="background-image: url('.$image[0].')"></div><div class="profiles-title" style="background: rgba('.$r.', '.$g.', '.$b.', .7);"><h2>'.get_the_title().'</h2><h3>'.get_custom_field('associated_company').'</h3></div></a></div>';
 		  endwhile;
 		  $return_string .= '</div>';
 	   endif;
