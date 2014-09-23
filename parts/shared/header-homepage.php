@@ -73,7 +73,7 @@
 			<div id="st-trigger-effects">
 				
 				<div data-effect="st-effect-4" class="icon icon-search" id="menu-search"></div>
-				<div data-effect="st-effect-5" class="icon icon-mail" id="menu-newsletter"></div>
+				<div data-effect="st-effect-5" class="icon icon-mail tooltips" id="menu-newsletter"><span>Newsletter</span></div>
 				
 			</div>
 		</nav>

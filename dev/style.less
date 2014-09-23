@@ -26,12 +26,13 @@ CONTENTS:
 05 Search/Newsletter Reveal
 06 Menu Styles
 07 Main Content
-08 Program Tiles
-09 Grad Profile Grid
-10 Grad Profile Single
-11 Footer
-12 Media queries
-13 Misc & mixens
+08 Ghost Button Shortcode Styles
+09 Program Tiles
+10 Grad Profile Grid
+11 Grad Profile Single
+12 Footer
+13 Media queries
+14 Misc & mixens
 ===========================
 */
 
@@ -347,7 +348,7 @@ input[type="checkbox"] {
 
 /* Styling for the search/newsletter icons */
 
-#st-trigger-effects {
+header #st-trigger-effects {
 	display: inline;
 	position: relative;
 	top: -5px;
@@ -366,14 +367,51 @@ input[type="checkbox"] {
 }
 
 /* Another homepage override */
-#header-homepage #st-trigger-effects div {
+header#header-homepage #st-trigger-effects div {
 	color: #fff;
 	&:hover {
 		color: @accent-color;
 		}
 	}
 
-
+/* Tooltip for Newsletter Icon */
+div.tooltips {
+	position: relative;
+	display: inline;
+}
+div.tooltips span {
+	position: absolute;
+	width:140px;
+	color: #FFFFFF;
+	background: @accent-color;
+	/* height: 26px;
+	line-height: 26px; */
+	text-align: center;
+	opacity: 0;
+	border-radius: 3px;
+	.transition(opacity 250ms);
+	
+	top: 44px;
+	left: 39px;
+	padding-top: 7px;
+	margin-left: -76px;
+	z-index: -999;
+}
+div.tooltips span:after {
+	content: '';
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -8px;
+	width: 0; height: 0;
+	border-bottom: 8px solid @accent-color;
+	border-right: 8px solid transparent;
+	border-left: 8px solid transparent;
+}
+div:hover.tooltips span {
+	opacity: 1;
+	z-index: 999;
+}
 
 /* ----------------------------------------------------------------------------------------------------------
 07 Main Content ---------------------------------------------------------------------------------------------
@@ -444,6 +482,70 @@ main {
 		float: right;
 		padding: 10px 0 25px 20px;
 	}
+	
+	/* Forms Styling */
+	input[type='text'], input[type='email'], select, textarea {
+		outline: none;
+		-webkit-appearance: none;
+		-webkit-border-radius: 0px;
+		-moz-appearance: none;
+		-moz-border-radius: 0px;
+		appearance: none;
+		border-radius: 0px;
+		
+		border: 3px @text-color solid;
+		background: @bg-color;
+		padding: 13px 15px 7px 15px;
+		
+		width: 100%;
+		
+		&:focus {
+			border: 3px @accent-color solid;
+		}
+	}
+	select {
+		background: url('img/arrow-down.svg') no-repeat right 8px center;
+		background-size: 15px 15px;
+		.font-size(@body-text-size);
+		padding-right: 30px;
+		font-family: @body-font;
+	}
+	input[type='submit'] {
+		outline: none;
+		-webkit-appearance: none;
+		-webkit-border-radius: 0px;
+		-moz-appearance: none;
+		-moz-border-radius: 0px;
+		appearance: none;
+		border-radius: 0px;
+		
+		border: 3px @text-color solid;
+		background: @bg-color;
+		padding: 13px 15px 7px 15px !important;
+		
+		cursor: pointer;
+		&:hover {
+			border: 3px @accent-color solid;
+			color: @accent-color;
+		}
+	}
+	
+	.ss-form-entry, .wpcf7 p {
+		.column(4,12);
+		.pull(8,12);
+		margin-bottom: 30px;
+	}
+	.ss-form li {
+		margin: 5px 0;
+		& input[type='text'] {
+			margin-top: 7px;
+		}
+	}
+	.ss-choice-label input[type='radio'] {
+		position: relative;
+		top: -2px;
+	}
+	
 }
 
 /* LIST STYLES */
@@ -456,10 +558,10 @@ main, article {
 			background: url('img/arrow-right.svg') no-repeat left 2px;
 			background-size: 15px 15px;
 			cursor: pointer;
-			& h3:hover, & h2:hover, & h1:hover, & strong:hover {
+			/* & > *:hover {
 				color: @accent-color;
 				text-decoration: underline;
-			}
+			} */
 			
 			&.active {
 				background: url('img/arrow-down.svg') no-repeat left 2px;
@@ -548,10 +650,43 @@ main.program {
 	color: @accent-color;
 	font-weight: bold;
 	font-style: italic;
+	padding-top: 6px;
 }
 
 /* ----------------------------------------------------------------------------------------------------------
-08 Program Tiles --------------------------------------------------------------------------------------------
+08 Ghost Button Shortcode Styles ----------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+.ghost-button {
+	display: inline-block;
+	border: 3px solid @text-color;
+	padding: 9px 14px 3px;
+	.font-size(18px);
+	font-weight: bold;
+	
+	text-decoration: none;
+	color: @text-color;
+	
+	&.arrow-left:before {
+		content:'\2190';
+		padding-right: 8px;
+	}
+	&.arrow-right:after {
+		content:'\2192';
+		padding-left: 8px;
+	}
+	&:hover {
+		border: 3px solid @accent-color;
+		color: @accent-color;
+		& a {
+			color: @accent-color;
+		}
+	}
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------
+09 Program Tiles --------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 
 #programs {
@@ -603,8 +738,11 @@ main.program {
 	
 }
 
+/* I'm not sure what this is, what it's purpose is, but it's in the way and needs to be cleared. I'm sorry if it breaks something. */
+div.ss-navigate { clear: both; }
+
 /* ----------------------------------------------------------------------------------------------------------
-09 Grad Profile Grid ----------------------------------------------------------------------------------------
+10 Grad Profile Grid ----------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 
 #profiles {
@@ -647,7 +785,7 @@ main.program {
 }
 
 /* ----------------------------------------------------------------------------------------------------------
-10 Grad Profile Single --------------------------------------------------------------------------------------
+11 Grad Profile Single --------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 
 article.profile {
@@ -720,7 +858,7 @@ article.profile {
 }
 
 /* ----------------------------------------------------------------------------------------------------------
-11 Footer ---------------------------------------------------------------------------------------------------
+12 Footer ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 
 #footer-clear {
@@ -752,6 +890,10 @@ footer {
 }
 #footer-social {
 	.column(4);
+	
+	position: relative;
+	left: -56px;
+	
 	&-icons {
 		.font-size(24px);
 		float: left;
@@ -783,9 +925,13 @@ footer {
 	.column(4);
 }
 
+.eo-events-widget li {
+	margin-bottom: 20px;
+}
+
 
 /* ----------------------------------------------------------------------------------------------------------
-12 Media queries --------------------------------------------------------------------------------------------
+13 Media queries --------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 
 /* 400 and up */
@@ -804,7 +950,7 @@ footer {
 
 
 /* ----------------------------------------------------------------------------------------------------------
-13 Misc & mixens --------------------------------------------------------------------------------------------
+14 Misc & mixens --------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 
 .icon {

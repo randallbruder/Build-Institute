@@ -172,12 +172,13 @@ CONTENTS:
 05 Search/Newsletter Reveal
 06 Menu Styles
 07 Main Content
-08 Program Tiles
-09 Grad Profile Grid
-10 Grad Profile Single
-11 Footer
-12 Media queries
-13 Misc & mixens
+08 Ghost Button Shortcode Styles
+09 Program Tiles
+10 Grad Profile Grid
+11 Grad Profile Single
+12 Footer
+13 Media queries
+14 Misc & mixens
 ===========================
 */
 /* ----------------------------------------------------------------------------------------------------------
@@ -555,12 +556,12 @@ input[type="checkbox"] {
   border: solid 3px #fff;
 }
 /* Styling for the search/newsletter icons */
-#st-trigger-effects {
+header #st-trigger-effects {
   display: inline;
   position: relative;
   top: -5px;
 }
-#st-trigger-effects div {
+header #st-trigger-effects div {
   padding-left: 20px;
   display: inline-block;
   color: #939b9e;
@@ -573,15 +574,56 @@ input[type="checkbox"] {
   -ms-transition: color 250ms;
   -o-transition: color 250ms;
 }
-#st-trigger-effects div:hover {
+header #st-trigger-effects div:hover {
   color: #3ac4bb;
 }
 /* Another homepage override */
-#header-homepage #st-trigger-effects div {
+header#header-homepage #st-trigger-effects div {
   color: #fff;
 }
-#header-homepage #st-trigger-effects div:hover {
+header#header-homepage #st-trigger-effects div:hover {
   color: #3ac4bb;
+}
+/* Tooltip for Newsletter Icon */
+div.tooltips {
+  position: relative;
+  display: inline;
+}
+div.tooltips span {
+  position: absolute;
+  width: 140px;
+  color: #FFFFFF;
+  background: #3ac4bb;
+  /* height: 26px;
+	line-height: 26px; */
+  text-align: center;
+  opacity: 0;
+  border-radius: 3px;
+  -webkit-transition: opacity 250ms;
+  -moz-transition: opacity 250ms;
+  -ms-transition: opacity 250ms;
+  -o-transition: opacity 250ms;
+  top: 44px;
+  left: 39px;
+  padding-top: 7px;
+  margin-left: -76px;
+  z-index: -999;
+}
+div.tooltips span:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -8px;
+  width: 0;
+  height: 0;
+  border-bottom: 8px solid #3ac4bb;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+}
+div:hover.tooltips span {
+  opacity: 1;
+  z-index: 999;
 }
 /* ----------------------------------------------------------------------------------------------------------
 07 Main Content ---------------------------------------------------------------------------------------------
@@ -610,6 +652,7 @@ main {
 }
 main {
   /* Standards */
+  /* Forms Styling */
 }
 main p,
 main ul {
@@ -659,6 +702,74 @@ main .alignright {
   float: right;
   padding: 10px 0 25px 20px;
 }
+main input[type='text'],
+main input[type='email'],
+main select,
+main textarea {
+  outline: none;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  -moz-appearance: none;
+  -moz-border-radius: 0px;
+  appearance: none;
+  border-radius: 0px;
+  border: 3px #636363 solid;
+  background: #f0efef;
+  padding: 13px 15px 7px 15px;
+  width: 100%;
+}
+main input[type='text']:focus,
+main input[type='email']:focus,
+main select:focus,
+main textarea:focus {
+  border: 3px #3ac4bb solid;
+}
+main select {
+  background: url('img/arrow-down.svg') no-repeat right 8px center;
+  background-size: 15px 15px;
+  line-height: 23px;
+  font-size: 16px;
+  font-size: 1.6rem;
+  padding-right: 30px;
+  font-family: "Intro", Helvetica, Arial, sans-serif;
+}
+main input[type='submit'] {
+  outline: none;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  -moz-appearance: none;
+  -moz-border-radius: 0px;
+  appearance: none;
+  border-radius: 0px;
+  border: 3px #636363 solid;
+  background: #f0efef;
+  padding: 13px 15px 7px 15px !important;
+  cursor: pointer;
+}
+main input[type='submit']:hover {
+  border: 3px #3ac4bb solid;
+  color: #3ac4bb;
+}
+main .ss-form-entry,
+main .wpcf7 p {
+  display: inline;
+  float: left;
+  width: 32.40740741%;
+  margin-left: 0.46296296%;
+  margin-right: 0.46296296%;
+  margin-right: 67.12962963%;
+  margin-bottom: 30px;
+}
+main .ss-form li {
+  margin: 5px 0;
+}
+main .ss-form li input[type='text'] {
+  margin-top: 7px;
+}
+main .ss-choice-label input[type='radio'] {
+  position: relative;
+  top: -2px;
+}
 /* LIST STYLES */
 main,
 article {
@@ -675,18 +786,11 @@ article > ol > li {
   background: url('img/arrow-right.svg') no-repeat left 2px;
   background-size: 15px 15px;
   cursor: pointer;
+  /* & > *:hover {
+				color: @accent-color;
+				text-decoration: underline;
+			} */
   /* This is messed up, but at least it fixes the placement of the arrow if h2, h3, h4 styles are used. */
-}
-main > ol > li h3:hover,
-article > ol > li h3:hover,
-main > ol > li h2:hover,
-article > ol > li h2:hover,
-main > ol > li h1:hover,
-article > ol > li h1:hover,
-main > ol > li strong:hover,
-article > ol > li strong:hover {
-  color: #3ac4bb;
-  text-decoration: underline;
 }
 main > ol > li.active,
 article > ol > li.active {
@@ -789,9 +893,39 @@ main.program h1 {
   color: #3ac4bb;
   font-weight: bold;
   font-style: italic;
+  padding-top: 6px;
 }
 /* ----------------------------------------------------------------------------------------------------------
-08 Program Tiles --------------------------------------------------------------------------------------------
+08 Ghost Button Shortcode Styles ----------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+.ghost-button {
+  display: inline-block;
+  border: 3px solid #636363;
+  padding: 9px 14px 3px;
+  line-height: 25.875px;
+  font-size: 18px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #636363;
+}
+.ghost-button.arrow-left:before {
+  content: '\2190';
+  padding-right: 8px;
+}
+.ghost-button.arrow-right:after {
+  content: '\2192';
+  padding-left: 8px;
+}
+.ghost-button:hover {
+  border: 3px solid #3ac4bb;
+  color: #3ac4bb;
+}
+.ghost-button:hover a {
+  color: #3ac4bb;
+}
+/* ----------------------------------------------------------------------------------------------------------
+09 Program Tiles --------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 #programs {
   display: block;
@@ -857,8 +991,12 @@ main.program h1 {
   margin-right: -0.25em;
   /* Adjusts for spacing */
 }
+/* I'm not sure what this is, what it's purpose is, but it's in the way and needs to be cleared. I'm sorry if it breaks something. */
+div.ss-navigate {
+  clear: both;
+}
 /* ----------------------------------------------------------------------------------------------------------
-09 Grad Profile Grid ----------------------------------------------------------------------------------------
+10 Grad Profile Grid ----------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 #profiles {
   display: block;
@@ -918,7 +1056,7 @@ main.program h1 {
   font-size: 1.6rem;
 }
 /* ----------------------------------------------------------------------------------------------------------
-10 Grad Profile Single --------------------------------------------------------------------------------------
+11 Grad Profile Single --------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 article.profile {
   display: block;
@@ -1023,7 +1161,7 @@ article.profile > #profile-content > p:last-child.no-after:after {
   font-weight: 900;
 }
 /* ----------------------------------------------------------------------------------------------------------
-11 Footer ---------------------------------------------------------------------------------------------------
+12 Footer ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 #footer-clear {
   clear: both;
@@ -1060,6 +1198,8 @@ footer a:hover {
   width: 24.30555556%;
   margin-left: 0.34722222%;
   margin-right: 0.34722222%;
+  position: relative;
+  left: -56px;
 }
 #footer-social-icons {
   line-height: 34.5px;
@@ -1099,8 +1239,11 @@ footer a:hover {
   margin-left: 0.34722222%;
   margin-right: 0.34722222%;
 }
+.eo-events-widget li {
+  margin-bottom: 20px;
+}
 /* ----------------------------------------------------------------------------------------------------------
-12 Media queries --------------------------------------------------------------------------------------------
+13 Media queries --------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 /* 400 and up */
 @media screen and (min-width: 400px) {
@@ -1111,7 +1254,7 @@ footer a:hover {
   /* Place your styles here for all 'Retina' screens */
 }
 /* ----------------------------------------------------------------------------------------------------------
-13 Misc & mixens --------------------------------------------------------------------------------------------
+14 Misc & mixens --------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 .icon {
   -webkit-transition: color 250ms;

@@ -129,6 +129,23 @@
 	
 	add_shortcode('profiles-grid', 'display_build_profiles');
 	
+	function ghost_button( $atts, $content = null ) {
+		$a = shortcode_atts( array(
+			'url' => 'http://buildinstitute.org',
+			'arrow' => 'none',
+		), $atts );
+
+		$button_classes = "ghost-button";
+		
+		if ($a['arrow'] == 'left') { $button_classes .= " arrow-left"; }
+		if ($a['arrow'] == 'right') { $button_classes .= " arrow-right"; }
+		
+		return '<a href="'.$a['url'].'"><span class="'.$button_classes.'">' . $content . '</span></a>';
+	}
+	
+	add_shortcode('button', 'ghost_button');
+
+	
 
 	/* ========================================================================================================================
 	
@@ -158,6 +175,9 @@
 		
 		wp_register_script( 'lightSlider', get_template_directory_uri().'/js/jquery.lightSlider.min.js', array(), '1.0.0', true );
 		wp_enqueue_script( 'lightSlider' );
+		
+		wp_register_script( 'clampJs', get_template_directory_uri().'/js/clamp.min.js', array(), '0.5.1', true );
+		wp_enqueue_script( 'clampJs' );
 
 		wp_register_style( 'screen', get_stylesheet_directory_uri().'/style.css', '', time().'.0', 'screen' );
         wp_enqueue_style( 'screen' );

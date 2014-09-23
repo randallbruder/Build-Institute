@@ -14,6 +14,12 @@ jQuery(document).ready(function($) {
 		}, 25);
 	});
 	
+	$( "#menu-newsletter-footer" ).click(function() {
+		setTimeout( function(){
+			$("#mce-EMAIL").focus();
+		}, 25);
+	});
+	
 	/* Newsletter sucess replacement */
 	
 	$( "#mc-embedded-subscribe" ).click(function() {
@@ -83,35 +89,37 @@ jQuery(document).ready(function($) {
 	$("li").click(function() {
 		
 		$("li > ol").click(function() {
-			return false;
+			return;
 		});
 		
-		if (	$(this).find("ol").is(':visible')) {
-			$(this).find("ol").fadeOut();
-			$(this).removeClass('active');
-		} else {
-			$(this).find("ol").fadeIn();
-			$(this).addClass('active');
+		if ($(this).find("> ol").length) {
+			if (	$(this).find("> ol").is(':visible')) {
+				$(this).removeClass('active');
+				$(this).find("> ol").fadeOut();
+			} else {
+				$(this).find("> ol").fadeIn();
+				$(this).addClass('active');
+			}
 		}
-	});
-	
-	$("li").click(function() {
 		
 		$("main li > ul").click(function() {
-			return false;
+			return;
 		});
 		
-		if (	$(this).find("ul").is(':visible')) {
-			$(this).find("ul").fadeOut();
-			$(this).removeClass('active');
-		} else {
-			$(this).find("ul").fadeIn();
-			$(this).addClass('active');
+		if ($(this).find("> ul").length) {
+			if (	$(this).find("> ul").is(':visible')) {
+				$(this).removeClass('active');
+				$(this).find("> ul").fadeOut();
+			} else {
+				$(this).find("> ul").fadeIn();
+				$(this).addClass('active');
+			}
 		}
 	});
 	  
-	  
-	  	
-	  
+	/* Clamp.js for events in footer. */
+	$('.clamp').each(function(index, element) {
+		$clamp(element, { clamp: 2, useNativeClamp: false });
+	});
 	
 });
