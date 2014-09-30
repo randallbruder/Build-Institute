@@ -12,6 +12,8 @@ Tags:			build, detroit
 @import "css/sidebarEffects.css";
 @import "css/jquery.selectbox.css";
 @import "css/jquery.lightSlider.css";
+@import "css/jquery.mmenu.css";
+@import "css/jquery.mmenu.header.css";
 @import "grid.less";
 @import "fonts.less";
 
@@ -65,7 +67,9 @@ body 				{ background: @bg-color; /* Don't forget to style your body to avoid us
 @text-color:		#636363;		// Site Text color
 @menu-color:		#939b9e;
 @bg-color: 		#f0efef;		// Site background color
+@footer-bg-color:#4f4f4f;		// Footer background color
 
+@header-slider-height: 490px;
 
 body, input, textarea, p {
 	font-family: @body-font;
@@ -85,7 +89,20 @@ h2 { .font-size(30px); padding-bottom: 10px; }
 h3 { .font-size(24px); padding-bottom: 10px; }
 h4 { .font-size(16px); font-weight: bold; }
 
+@media (max-width: @max-width-mobile) {
+	h1 { .font-size(35px); padding-bottom: 10px; }
+	h2 { .font-size(23px); padding-bottom: 10px; }
+	h3 { .font-size(19px); padding-bottom: 10px; }
+}
+
 h1, h2, h3 { & b, & strong { font-weight: normal; } }
+
+
+/* Responsive Variables */
+
+@max-width-mobile: 580px;
+@max-width-tablet: 1150px;
+
 
 /* ----------------------------------------------------------------------------------------------------------
 03 Semantic Grid System -------------------------------------------------------------------------------------
@@ -111,11 +128,31 @@ header {
 	& #site-logo {
 		float: left;
 		z-index: 100;
+		& svg {
+			@media (max-width: @max-width-mobile) {
+				height: 60px;
+				width: 112px;
+			}
+		}
+	}
+}
+
+#header {
+	&-desktop {
+		@media (max-width: @max-width-mobile) {
+			display: none;
+			}
+	}
+	&-mobile {
+		display: none;
+		@media (max-width: @max-width-mobile) {
+			display: block;
+			}
 	}
 }
 
 #header-homepage {
-	height: 590px;
+	height: @header-slider-height;
 
 	/* background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url('img/header.jpg') no-repeat center center;
 	-webkit-background-size: cover;
@@ -127,20 +164,20 @@ header {
 
 /* Some jquery.lightSlider.min.js overrided styles (I'm sorry) */
 .csSlideOuter {
-	height: 590px;
+	height: @header-slider-height;
 	position: absolute;
 	width: 100%;
 }
 .csSlideOuter .csPager.cSpg { margin: -30px 0 0; }
 .csSlideOuter .csPager.cSpg > li:hover a, .csSlideOuter .csPager.cSpg > li.active a { background-color: @accent-color; }
-.csSlideWrapper { height: 590px !important; }
+.csSlideWrapper { height: @header-slider-height !important; }
 .lightSlider { padding-bottom: 300px !important; }
 /* Okay, we're back to our regularly scheduled CSS */
 
 #header-slider {
 	width: 100%;
 	& li {
-		height: 590px;
+		height: @header-slider-height;
 		position: absolute;
 		list-style-type: none;
 		& h1 {
@@ -154,7 +191,22 @@ header {
 		& p {
 			.column(8);
 			.push(2);
+			.pull(6);
 			color: #fff;
+		}
+		& .ghost-button {
+			float: left;
+			.push(2);
+			
+			border: 3px solid #fff;
+			color: #fff;
+			
+			margin-top: 23px;
+			
+			&:hover {
+				border: 3px solid @accent-color;
+				color: @accent-color;
+			}
 		}
 	}
 	& a {
@@ -170,6 +222,16 @@ header {
 	.column(12);
 	.push(2);
 	.pull(2);
+	@media (max-width: @max-width-mobile) {
+		.column(16);
+		.push(0);
+		.pull(0);
+	}
+	@media (max-width: @max-width-tablet) and (min-width: @max-width-mobile) {
+		.column(14);
+		.push(1);
+		.pull(1);
+	}
 	
 	padding-top: 25px;
 }
@@ -181,6 +243,10 @@ header {
 .st-menu, #newsletter-sucess {
 	.column(12);
 	.push(2);
+	@media (max-width: @max-width-tablet) and (min-width: @max-width-mobile) {
+		.column(14);
+		.push(1);
+	}
 }
 
 .st-menu form {
@@ -288,63 +354,67 @@ input[type="checkbox"] {
 	display: inline;
 }
 
-#menu-primary > li {
-	display: inline-block;
-	position: relative;
-}
+#header-desktop {
 
-#menu-primary li a {
-  display: inline-block;
-  margin: 0 0 0 8px;
-  padding: 6px 16px 3px 15px;
-  .font-size(@body-text-size);
-  line-height: 1.8;
-  appearance: none;
-  box-shadow: none;
-  border-radius: 0;
-  
-  background: rgba(0,0,0,0);
-  text-decoration: none;
-  
-  color: @menu-color;
-  
-}
-
-#menu-primary > li:hover > a, .sub-menu li a  {
-  border: solid 3px @menu-color;
-  padding: 3px 13px 0 12px !important;
-}
-
-.sub-menu {
-	display: none;
-	position: absolute;
-	white-space: nowrap;
-	top: 34px; /* this should be the same height as the top level menu -- height + padding + borders */
-	& ul {
-		list-style: none;
+	#menu-primary > li {
+		display: inline-block;
+		position: relative;
 	}
-	& li {
-		display: block;
-		margin-bottom: -3px;
-		
-		& a {
-			background: @bg-color !important;
-			&:hover {
-				background: @menu-color !important;
-				color: #fff !important;
+	
+	#menu-primary li a {
+	  display: inline-block;
+	  margin: 0 0 0 8px;
+	  padding: 6px 16px 3px 15px;
+	  .font-size(@body-text-size);
+	  line-height: 1.8;
+	  appearance: none;
+	  box-shadow: none;
+	  border-radius: 0;
+	  
+	  background: rgba(0,0,0,0);
+	  text-decoration: none;
+	  
+	  color: @menu-color;
+	  
+	}
+	
+	#menu-primary > li:hover > a, .sub-menu li a  {
+	  border: solid 3px @menu-color;
+	  padding: 3px 13px 0 12px !important;
+	}
+	
+	.sub-menu {
+		display: none;
+		position: absolute;
+		white-space: nowrap;
+		top: 34px; /* this should be the same height as the top level menu -- height + padding + borders */
+		& ul {
+			list-style: none;
+		}
+		& li {
+			display: block;
+			margin-bottom: -3px;
+			
+			& a {
+				background: @bg-color !important;
+				&:hover {
+					background: @menu-color !important;
+					color: #fff !important;
+				}
 			}
 		}
 	}
+	
+	#menu-primary li:hover > .sub-menu {
+		display: block; /* show sub menus when hovering over a parent */
+	}
+	
+	/* Homepage Overrides */
+	#header-homepage #menu-primary li a { color: #fff; background: none !important; }
+	#header-homepage #menu-primary .sub-menu li a:hover { background: #fff !important; color: #000 !important; }
+	#header-homepage #menu-primary > li:hover > a, #header-homepage .sub-menu li a  { border: solid 3px #fff; }
+	
 }
-
-#menu-primary li:hover > .sub-menu {
-	display: block; /* show sub menus when hovering over a parent */
-}
-
-/* Homepage Overrides */
-#header-homepage #menu-primary li a { color: #fff; background: none !important; }
-#header-homepage #menu-primary .sub-menu li a:hover { background: #fff !important; color: #000 !important; }
-#header-homepage #menu-primary > li:hover > a, #header-homepage .sub-menu li a  { border: solid 3px #fff; }
 
 /* Styling for the search/newsletter icons */
 
@@ -364,6 +434,15 @@ header #st-trigger-effects {
 			color: @accent-color;
 		}
 	}
+}
+
+/* Styling for mobile menu button */
+#mobile-menu-button {
+	float: right;
+	.font-size(22px);
+	display: inline-block;
+	color: @menu-color;
+	padding-top: 10px;
 }
 
 /* Another homepage override */
@@ -421,6 +500,34 @@ main {
 	.column(12);
 	.push(2);
 	margin-top: 45px;
+	@media (max-width: @max-width-mobile) {
+		.column(16);
+		.push(0);
+	}
+	@media (max-width: @max-width-tablet) and (min-width: @max-width-mobile) {
+		.column(14);
+		.push(1);
+	}
+	padding-bottom: 70px;
+}
+
+main, #header-mobile {
+	@media (max-width: @max-width-mobile) {
+		width: 95%;
+		padding-left: 2.5%;
+	}
+}
+
+#footer-clear {
+	@media (max-width: @max-width-mobile) {
+		padding-left: 2.5% !important;
+		background: @footer-bg-color;
+	}
+}
+footer {
+	@media (max-width: @max-width-mobile) {
+		width: 95% !important;
+	}
 }
 
 #homepage-content {
@@ -454,6 +561,13 @@ main {
 		font-family: @heading-font;
 		padding-left: 25px;
 		border-left: 13px solid #000;
+		@media (max-width: @max-width-mobile) {
+			.font-size(23px);
+			padding-left: 0;
+			border-left: 0;
+			padding-bottom: 13px;
+			border-bottom: 13px solid #000;
+		}
 	}
 	& blockquote {
 		.push(1);
@@ -477,10 +591,20 @@ main {
 	& .alignleft {
 		float: left;
 		padding: 10px 20px 25px 0;
+		max-width: 100%;
+		@media (max-width: @max-width-mobile) {
+			float: none;
+			padding: 0;
+		}
 	}
 	& .alignright {
 		float: right;
 		padding: 10px 0 25px 20px;
+		max-width: 100%;
+		@media (max-width: @max-width-mobile) {
+			float: none;
+			padding: 0;
+		}
 	}
 	
 	/* Forms Styling */
@@ -533,6 +657,10 @@ main {
 	.ss-form-entry, .wpcf7 p {
 		.column(4,12);
 		.pull(8,12);
+		@media (max-width: @max-width-mobile) {
+			.column(12,12);
+			.pull(0,0);
+		}
 		margin-bottom: 30px;
 	}
 	.ss-form li {
@@ -626,7 +754,7 @@ main.program {
 		line-height: 0;
 		margin-bottom: 25px;
 		width: 100%;
-		height: 590px;
+		height: @header-slider-height;
 		background-size: cover;
 		background-position: center center;
 		& h1 {
@@ -691,6 +819,9 @@ main.program {
 
 #programs {
 	.row(12);
+	@media (max-width: @max-width-mobile) {
+		.column(16);
+	}
 	padding-top: 10px;
 	& h1 {
 		text-align: center;
@@ -698,6 +829,12 @@ main.program {
 	}
 	&-tile {
 		.column(4,12);
+		@media (max-width: @max-width-mobile) {
+			.column(16,16);
+		}
+		@media (max-width: @max-width-tablet) and (min-width: @max-width-mobile) {
+		.column(6,12);
+		}
 		margin-bottom: 1.1904762%;
 		height: 140px;
 		position: relative;
@@ -748,10 +885,20 @@ div.ss-navigate { clear: both; }
 #profiles {
 	.row(12);
 	padding-bottom: 40px;
+	@media (max-width: @max-width-mobile) {
+		.column(16);
+	}
 }
 
 .profiles-single {
 	.column(4,12);
+	@media (max-width: @max-width-mobile) {
+		.column(16,16);
+	}
+	
+	@media (max-width: @max-width-tablet) and (min-width: @max-width-mobile) {
+		.column(6,12);
+	}
 	
 	margin-bottom: 10px;
 	position: relative;
@@ -811,6 +958,10 @@ article.profile {
 	&-featured-image {
 		.column(10,12);
 		.push(2,12);
+		@media (max-width: @max-width-mobile) {
+			.column(12,12);
+			.push(0,12);
+		}
 		height: 450px;
 		background-size: cover;
 		background-position: center center;
@@ -818,6 +969,10 @@ article.profile {
 	&-title {
 		.column(10,12);
 		.pull(2,12);
+		@media (max-width: @max-width-mobile) {
+			.column(12,12);
+			.pull(0,12);
+		}
 		position: relative;
 		top: -50px;
 		margin-bottom: -50px;
@@ -838,6 +993,10 @@ article.profile {
 		& > p, & h1, & h2, & h3 {
 			.column(10,12);
 			.push(2,12);
+			@media (max-width: @max-width-mobile) {
+				.column(12,12);
+				.push(0,12);
+			}
 		}
 		& > p, & h1, & h2, & h3, & h4, & blockquote {
 			float: none !important;
@@ -846,6 +1005,10 @@ article.profile {
 		& blockquote {
 			.column(7,12);
 			.push(0);
+			@media (max-width: @max-width-mobile) {
+				.column(12,12);
+				.push(0,12);
+			}
 			text-indent: -1.3em;
 			& p {
 				color: @accent-color;
@@ -863,12 +1026,11 @@ article.profile {
 
 #footer-clear {
 	clear: both;
-	padding-top: 70px;
 }
 
 footer {
 	width: 100%;
-	background: #4f4f4f;
+	background: @footer-bg-color;
 	color: #fff;
 	overflow: auto;
 	padding: 42px 0;
@@ -887,12 +1049,32 @@ footer {
 #footer-contact {
 	.column(4);
 	.push(2);
+	@media (max-width: @max-width-mobile) {
+		.column(16);
+		.push(0);
+		padding-bottom: 40px;
+	}
+	@media (max-width: @max-width-tablet) and (min-width: @max-width-mobile) {
+		.column(7);
+		.push(1);
+	}
+	
 }
 #footer-social {
 	.column(4);
-	
 	position: relative;
 	left: -56px;
+	
+	@media (max-width: @max-width-mobile) {
+		.column(16);
+		.push(0);
+		left: 0px;
+		padding-bottom: 40px;
+	}
+	@media (max-width: @max-width-tablet) and (min-width: @max-width-mobile) {
+		.column(7);
+		.push(1);
+	}
 	
 	&-icons {
 		.font-size(24px);
@@ -923,6 +1105,14 @@ footer {
 }
 #footer-right {
 	.column(4);
+	@media (max-width: @max-width-mobile) {
+		.column(16);
+		.push(0);
+	}
+	@media (max-width: @max-width-tablet) and (min-width: @max-width-mobile) {
+		.column(7);
+		.push(1);
+	}
 }
 
 .eo-events-widget li {
@@ -934,10 +1124,9 @@ footer {
 13 Media queries --------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 
-/* 400 and up */
-@media screen and (min-width:400px) {
+/* Mobile */
+@media only screen and (max-device-width:480px) {
 
-					 /* Place your styles here for all widths greater than 400px */
 
 }
 

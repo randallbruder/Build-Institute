@@ -122,4 +122,13 @@ jQuery(document).ready(function($) {
 		$clamp(element, { clamp: 2, useNativeClamp: false });
 	});
 	
+	/* Mobile Menu */
+	$("#mobile-menu").mmenu({
+		header: {
+			add: true,
+			update: true,
+			title: "Build Institute"
+		}
+	});
+	
 });

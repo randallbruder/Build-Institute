@@ -178,10 +178,16 @@
 		
 		wp_register_script( 'clampJs', get_template_directory_uri().'/js/clamp.min.js', array(), '0.5.1', true );
 		wp_enqueue_script( 'clampJs' );
-
+		
+		wp_register_script( 'mmenu', get_template_directory_uri().'/js/jquery.mmenu.min.js', array(), '4.5.5', true );
+		wp_enqueue_script( 'mmenu' );
+		
+		wp_register_script( 'mmenu-header', get_template_directory_uri().'/js/jquery.mmenu.header.min.js', array(), '4.5.5', true );
+		wp_enqueue_script( 'mmenu-header' );
+		
 		wp_register_style( 'screen', get_stylesheet_directory_uri().'/style.css', '', time().'.0', 'screen' );
-        wp_enqueue_style( 'screen' );
-        
+		wp_enqueue_style( 'screen' );
+		
 	}
 	
 	function my_theme_add_editor_styles() {

@@ -2,6 +2,8 @@
 @import "css/sidebarEffects.css";
 @import "css/jquery.selectbox.css";
 @import "css/jquery.lightSlider.css";
+@import "css/jquery.mmenu.css";
+@import "css/jquery.mmenu.header.css";
 /*
 Theme Name:		Build Institute
 Theme URI:		http://buildinstitute.com
@@ -161,6 +163,10 @@ body:after {
   content: '\e80a';
 }
 /* '' */
+.icon-menu:before {
+  content: '\e80b';
+}
+/* '' */
 /*
 ===========================
 CONTENTS:
@@ -260,6 +266,26 @@ h4 {
   font-size: 1.6rem;
   font-weight: bold;
 }
+@media (max-width: 580px) {
+  h1 {
+    line-height: 50.3125px;
+    font-size: 35px;
+    font-size: 3.5rem;
+    padding-bottom: 10px;
+  }
+  h2 {
+    line-height: 33.0625px;
+    font-size: 23px;
+    font-size: 2.3rem;
+    padding-bottom: 10px;
+  }
+  h3 {
+    line-height: 27.3125px;
+    font-size: 19px;
+    font-size: 1.9rem;
+    padding-bottom: 10px;
+  }
+}
 h1 b,
 h2 b,
 h3 b,
@@ -268,6 +294,7 @@ h2 strong,
 h3 strong {
   font-weight: normal;
 }
+/* Responsive Variables */
 /* ----------------------------------------------------------------------------------------------------------
 03 Semantic Grid System -------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
@@ -282,8 +309,27 @@ header #site-logo {
   float: left;
   z-index: 100;
 }
+@media (max-width: 580px) {
+  header #site-logo svg {
+    height: 60px;
+    width: 112px;
+  }
+}
+@media (max-width: 580px) {
+  #header-desktop {
+    display: none;
+  }
+}
+#header-mobile {
+  display: none;
+}
+@media (max-width: 580px) {
+  #header-mobile {
+    display: block;
+  }
+}
 #header-homepage {
-  height: 590px;
+  height: 490px;
   /* background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url('img/header.jpg') no-repeat center center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -292,7 +338,7 @@ header #site-logo {
 }
 /* Some jquery.lightSlider.min.js overrided styles (I'm sorry) */
 .csSlideOuter {
-  height: 590px;
+  height: 490px;
   position: absolute;
   width: 100%;
 }
@@ -304,7 +350,7 @@ header #site-logo {
   background-color: #3ac4bb;
 }
 .csSlideWrapper {
-  height: 590px !important;
+  height: 490px !important;
 }
 .lightSlider {
   padding-bottom: 300px !important;
@@ -314,7 +360,7 @@ header #site-logo {
   width: 100%;
 }
 #header-slider li {
-  height: 590px;
+  height: 490px;
   position: absolute;
   list-style-type: none;
 }
@@ -337,7 +383,19 @@ header #site-logo {
   margin-left: 0.34722222%;
   margin-right: 0.34722222%;
   margin-left: 12.84722222%;
+  margin-right: 37.84722222%;
   color: #fff;
+}
+#header-slider li .ghost-button {
+  float: left;
+  margin-left: 12.84722222%;
+  border: 3px solid #fff;
+  color: #fff;
+  margin-top: 23px;
+}
+#header-slider li .ghost-button:hover {
+  border: 3px solid #3ac4bb;
+  color: #3ac4bb;
 }
 #header-slider a {
   color: #fff;
@@ -356,6 +414,26 @@ header #site-logo {
   margin-right: 12.84722222%;
   padding-top: 25px;
 }
+@media (max-width: 580px) {
+  #header-content {
+    display: inline;
+    float: left;
+    width: 99.30555556%;
+    margin-left: 0.34722222%;
+    margin-right: 0.34722222%;
+  }
+}
+@media (max-width: 1150px) and (min-width: 580px) {
+  #header-content {
+    display: inline;
+    float: left;
+    width: 86.80555556%;
+    margin-left: 0.34722222%;
+    margin-right: 0.34722222%;
+    margin-left: 6.59722222%;
+    margin-right: 6.59722222%;
+  }
+}
 /* ----------------------------------------------------------------------------------------------------------
 05 Search/Newsletter Reveal ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
@@ -367,6 +445,17 @@ header #site-logo {
   margin-left: 0.34722222%;
   margin-right: 0.34722222%;
   margin-left: 12.84722222%;
+}
+@media (max-width: 1150px) and (min-width: 580px) {
+  .st-menu,
+  #newsletter-sucess {
+    display: inline;
+    float: left;
+    width: 86.80555556%;
+    margin-left: 0.34722222%;
+    margin-right: 0.34722222%;
+    margin-left: 6.59722222%;
+  }
 }
 .st-menu form {
   display: block;
@@ -493,11 +582,14 @@ input[type="checkbox"] {
 #menu-primary {
   display: inline;
 }
-#menu-primary > li {
+#header-desktop {
+  /* Homepage Overrides */
+}
+#header-desktop #menu-primary > li {
   display: inline-block;
   position: relative;
 }
-#menu-primary li a {
+#header-desktop #menu-primary li a {
   display: inline-block;
   margin: 0 0 0 8px;
   padding: 6px 16px 3px 15px;
@@ -512,47 +604,46 @@ input[type="checkbox"] {
   text-decoration: none;
   color: #939b9e;
 }
-#menu-primary > li:hover > a,
-.sub-menu li a {
+#header-desktop #menu-primary > li:hover > a,
+#header-desktop .sub-menu li a {
   border: solid 3px #939b9e;
   padding: 3px 13px 0 12px !important;
 }
-.sub-menu {
+#header-desktop .sub-menu {
   display: none;
   position: absolute;
   white-space: nowrap;
   top: 34px;
   /* this should be the same height as the top level menu -- height + padding + borders */
 }
-.sub-menu ul {
+#header-desktop .sub-menu ul {
   list-style: none;
 }
-.sub-menu li {
+#header-desktop .sub-menu li {
   display: block;
   margin-bottom: -3px;
 }
-.sub-menu li a {
+#header-desktop .sub-menu li a {
   background: #f0efef !important;
 }
-.sub-menu li a:hover {
+#header-desktop .sub-menu li a:hover {
   background: #939b9e !important;
   color: #fff !important;
 }
-#menu-primary li:hover > .sub-menu {
+#header-desktop #menu-primary li:hover > .sub-menu {
   display: block;
   /* show sub menus when hovering over a parent */
 }
-/* Homepage Overrides */
-#header-homepage #menu-primary li a {
+#header-desktop #header-homepage #menu-primary li a {
   color: #fff;
   background: none !important;
 }
-#header-homepage #menu-primary .sub-menu li a:hover {
+#header-desktop #header-homepage #menu-primary .sub-menu li a:hover {
   background: #fff !important;
   color: #000 !important;
 }
-#header-homepage #menu-primary > li:hover > a,
-#header-homepage .sub-menu li a {
+#header-desktop #header-homepage #menu-primary > li:hover > a,
+#header-desktop #header-homepage .sub-menu li a {
   border: solid 3px #fff;
 }
 /* Styling for the search/newsletter icons */
@@ -576,6 +667,16 @@ header #st-trigger-effects div {
 }
 header #st-trigger-effects div:hover {
   color: #3ac4bb;
+}
+/* Styling for mobile menu button */
+#mobile-menu-button {
+  float: right;
+  line-height: 31.625px;
+  font-size: 22px;
+  font-size: 2.2rem;
+  display: inline-block;
+  color: #939b9e;
+  padding-top: 10px;
 }
 /* Another homepage override */
 header#header-homepage #st-trigger-effects div {
@@ -636,6 +737,44 @@ main {
   margin-right: 0.34722222%;
   margin-left: 12.84722222%;
   margin-top: 45px;
+  padding-bottom: 70px;
+}
+@media (max-width: 580px) {
+  main {
+    display: inline;
+    float: left;
+    width: 99.30555556%;
+    margin-right: 0.34722222%;
+    margin-left: 0.34722222%;
+  }
+}
+@media (max-width: 1150px) and (min-width: 580px) {
+  main {
+    display: inline;
+    float: left;
+    width: 86.80555556%;
+    margin-left: 0.34722222%;
+    margin-right: 0.34722222%;
+    margin-left: 6.59722222%;
+  }
+}
+@media (max-width: 580px) {
+  main,
+  #header-mobile {
+    width: 95%;
+    padding-left: 2.5%;
+  }
+}
+@media (max-width: 580px) {
+  #footer-clear {
+    padding-left: 2.5% !important;
+    background: #4f4f4f;
+  }
+}
+@media (max-width: 580px) {
+  footer {
+    width: 95% !important;
+  }
 }
 #homepage-content {
   display: inline;
@@ -676,6 +815,17 @@ main > article > p:first-of-type {
   padding-left: 25px;
   border-left: 13px solid #000;
 }
+@media (max-width: 580px) {
+  main > article > p:first-of-type {
+    line-height: 33.0625px;
+    font-size: 23px;
+    font-size: 2.3rem;
+    padding-left: 0;
+    border-left: 0;
+    padding-bottom: 13px;
+    border-bottom: 13px solid #000;
+  }
+}
 main blockquote {
   margin-left: 6.59722222%;
   margin-right: 6.59722222%;
@@ -697,10 +847,24 @@ main hr {
 main .alignleft {
   float: left;
   padding: 10px 20px 25px 0;
+  max-width: 100%;
+}
+@media (max-width: 580px) {
+  main .alignleft {
+    float: none;
+    padding: 0;
+  }
 }
 main .alignright {
   float: right;
   padding: 10px 0 25px 20px;
+  max-width: 100%;
+}
+@media (max-width: 580px) {
+  main .alignright {
+    float: none;
+    padding: 0;
+  }
 }
 main input[type='text'],
 main input[type='email'],
@@ -759,6 +923,17 @@ main .wpcf7 p {
   margin-right: 0.46296296%;
   margin-right: 67.12962963%;
   margin-bottom: 30px;
+}
+@media (max-width: 580px) {
+  main .ss-form-entry,
+  main .wpcf7 p {
+    display: inline;
+    float: left;
+    width: 99.07407407%;
+    margin-left: 0.46296296%;
+    margin-right: 0.46296296%;
+    margin-right: NaN%;
+  }
 }
 main .ss-form li {
   margin: 5px 0;
@@ -869,7 +1044,7 @@ main.program #featured-image {
   line-height: 0;
   margin-bottom: 25px;
   width: 100%;
-  height: 590px;
+  height: 490px;
   background-size: cover;
   background-position: center center;
 }
@@ -943,6 +1118,15 @@ main.program h1 {
 #programs:after {
   clear: both;
 }
+@media (max-width: 580px) {
+  #programs {
+    display: inline;
+    float: left;
+    width: 99.30555556%;
+    margin-left: 0.34722222%;
+    margin-right: 0.34722222%;
+  }
+}
 #programs h1 {
   text-align: center;
   padding-bottom: 30px;
@@ -956,6 +1140,24 @@ main.program h1 {
   margin-bottom: 1.1904762%;
   height: 140px;
   position: relative;
+}
+@media (max-width: 580px) {
+  #programs-tile {
+    display: inline;
+    float: left;
+    width: 99.30555556%;
+    margin-left: 0.34722222%;
+    margin-right: 0.34722222%;
+  }
+}
+@media (max-width: 1150px) and (min-width: 580px) {
+  #programs-tile {
+    display: inline;
+    float: left;
+    width: 49.07407407%;
+    margin-left: 0.46296296%;
+    margin-right: 0.46296296%;
+  }
 }
 #programs-tile:hover {
   background: #939b9e !important;
@@ -1014,6 +1216,15 @@ div.ss-navigate {
 #profiles:after {
   clear: both;
 }
+@media (max-width: 580px) {
+  #profiles {
+    display: inline;
+    float: left;
+    width: 99.30555556%;
+    margin-left: 0.34722222%;
+    margin-right: 0.34722222%;
+  }
+}
 .profiles-single {
   display: inline;
   float: left;
@@ -1022,6 +1233,24 @@ div.ss-navigate {
   margin-right: 0.46296296%;
   margin-bottom: 10px;
   position: relative;
+}
+@media (max-width: 580px) {
+  .profiles-single {
+    display: inline;
+    float: left;
+    width: 99.30555556%;
+    margin-left: 0.34722222%;
+    margin-right: 0.34722222%;
+  }
+}
+@media (max-width: 1150px) and (min-width: 580px) {
+  .profiles-single {
+    display: inline;
+    float: left;
+    width: 49.07407407%;
+    margin-left: 0.46296296%;
+    margin-right: 0.46296296%;
+  }
 }
 .profiles-single .profiles-thumb {
   width: 100%;
@@ -1099,6 +1328,15 @@ article.profile > #profile-content > p:last-child.no-after:after {
   background-size: cover;
   background-position: center center;
 }
+@media (max-width: 580px) {
+  #profile-featured-image {
+    display: inline;
+    float: left;
+    width: 99.07407407%;
+    margin-right: 0.46296296%;
+    margin-left: 0.46296296%;
+  }
+}
 #profile-title {
   display: inline;
   float: left;
@@ -1109,6 +1347,15 @@ article.profile > #profile-content > p:last-child.no-after:after {
   position: relative;
   top: -50px;
   margin-bottom: -50px;
+}
+@media (max-width: 580px) {
+  #profile-title {
+    display: inline;
+    float: left;
+    width: 99.07407407%;
+    margin-left: 0.46296296%;
+    margin-right: 0.46296296%;
+  }
 }
 #profile-title h1,
 #profile-title h2 {
@@ -1134,6 +1381,18 @@ article.profile > #profile-content > p:last-child.no-after:after {
   margin-right: 0.46296296%;
   margin-left: 17.12962963%;
 }
+@media (max-width: 580px) {
+  #profile-content > p,
+  #profile-content h1,
+  #profile-content h2,
+  #profile-content h3 {
+    display: inline;
+    float: left;
+    width: 99.07407407%;
+    margin-right: 0.46296296%;
+    margin-left: 0.46296296%;
+  }
+}
 #profile-content > p,
 #profile-content h1,
 #profile-content h2,
@@ -1152,6 +1411,15 @@ article.profile > #profile-content > p:last-child.no-after:after {
   margin-left: 0.34722222%;
   text-indent: -1.3em;
 }
+@media (max-width: 580px) {
+  #profile-content blockquote {
+    display: inline;
+    float: left;
+    width: 99.07407407%;
+    margin-right: 0.46296296%;
+    margin-left: 0.46296296%;
+  }
+}
 #profile-content blockquote p {
   color: #3ac4bb;
   line-height: 51.75px;
@@ -1165,7 +1433,6 @@ article.profile > #profile-content > p:last-child.no-after:after {
 ---------------------------------------------------------------------------------------------------------- */
 #footer-clear {
   clear: both;
-  padding-top: 70px;
 }
 footer {
   width: 100%;
@@ -1192,6 +1459,26 @@ footer a:hover {
   margin-right: 0.34722222%;
   margin-left: 12.84722222%;
 }
+@media (max-width: 580px) {
+  #footer-contact {
+    display: inline;
+    float: left;
+    width: 99.30555556%;
+    margin-right: 0.34722222%;
+    margin-left: 0.34722222%;
+    padding-bottom: 40px;
+  }
+}
+@media (max-width: 1150px) and (min-width: 580px) {
+  #footer-contact {
+    display: inline;
+    float: left;
+    width: 43.05555556%;
+    margin-left: 0.34722222%;
+    margin-right: 0.34722222%;
+    margin-left: 6.59722222%;
+  }
+}
 #footer-social {
   display: inline;
   float: left;
@@ -1200,6 +1487,27 @@ footer a:hover {
   margin-right: 0.34722222%;
   position: relative;
   left: -56px;
+}
+@media (max-width: 580px) {
+  #footer-social {
+    display: inline;
+    float: left;
+    width: 99.30555556%;
+    margin-right: 0.34722222%;
+    margin-left: 0.34722222%;
+    left: 0px;
+    padding-bottom: 40px;
+  }
+}
+@media (max-width: 1150px) and (min-width: 580px) {
+  #footer-social {
+    display: inline;
+    float: left;
+    width: 43.05555556%;
+    margin-left: 0.34722222%;
+    margin-right: 0.34722222%;
+    margin-left: 6.59722222%;
+  }
 }
 #footer-social-icons {
   line-height: 34.5px;
@@ -1239,16 +1547,32 @@ footer a:hover {
   margin-left: 0.34722222%;
   margin-right: 0.34722222%;
 }
+@media (max-width: 580px) {
+  #footer-right {
+    display: inline;
+    float: left;
+    width: 99.30555556%;
+    margin-right: 0.34722222%;
+    margin-left: 0.34722222%;
+  }
+}
+@media (max-width: 1150px) and (min-width: 580px) {
+  #footer-right {
+    display: inline;
+    float: left;
+    width: 43.05555556%;
+    margin-left: 0.34722222%;
+    margin-right: 0.34722222%;
+    margin-left: 6.59722222%;
+  }
+}
 .eo-events-widget li {
   margin-bottom: 20px;
 }
 /* ----------------------------------------------------------------------------------------------------------
 13 Media queries --------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
-/* 400 and up */
-@media screen and (min-width: 400px) {
-  /* Place your styles here for all widths greater than 400px */
-}
+/* Mobile */
 /* Retina Display */
 @media screen and (-webkit-min-device-pixel-ratio: 2) {
   /* Place your styles here for all 'Retina' screens */
