@@ -15,7 +15,8 @@ body,
 
 .st-content {
 	/* Taking this out, let's see what it messes up. */
-	/* overflow-y: scroll; */
+	/* DON'T TAKE THIS OUT, IT'S ACTUALLY IMPORTANT */
+	overflow-y: scroll;
 	background: #f0efef;
 }
 
