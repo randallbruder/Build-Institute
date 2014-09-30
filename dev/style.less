@@ -69,7 +69,7 @@ body 				{ background: @bg-color; /* Don't forget to style your body to avoid us
 @bg-color: 		#f0efef;		// Site background color
 @footer-bg-color:#4f4f4f;		// Footer background color
 
-@header-slider-height: 490px;
+@header-slider-height: 520px;
 
 body, input, textarea, p {
 	font-family: @body-font;
@@ -139,13 +139,13 @@ header {
 
 #header {
 	&-desktop {
-		@media (max-width: @max-width-mobile) {
+		@media (max-width: @max-width-tablet) {
 			display: none;
 			}
 	}
 	&-mobile {
 		display: none;
-		@media (max-width: @max-width-mobile) {
+		@media (max-width: @max-width-tablet) {
 			display: block;
 			}
 	}
@@ -513,7 +513,7 @@ main {
 
 main, #header-mobile {
 	@media (max-width: @max-width-mobile) {
-		width: 95%;
+		width: 96.5%;
 		padding-left: 2.5%;
 	}
 }
@@ -526,7 +526,7 @@ main, #header-mobile {
 }
 footer {
 	@media (max-width: @max-width-mobile) {
-		width: 95% !important;
+		width: 96.5% !important;
 	}
 }
 
@@ -555,6 +555,9 @@ main {
 	& img {
 		max-width: 100%;
 		height: auto;
+		@media (max-width: @max-width-mobile) {
+		width: 100%;
+		}
 	}
 	& > article > p:first-of-type {
 		.font-size(30px);
@@ -605,6 +608,10 @@ main {
 			float: none;
 			padding: 0;
 		}
+	}
+	
+	& iframe {
+		max-width: 100%;
 	}
 	
 	/* Forms Styling */
@@ -836,6 +843,9 @@ main.program {
 		.column(6,12);
 		}
 		margin-bottom: 1.1904762%;
+		@media (max-width: @max-width-mobile) {
+			margin-bottom: 3%;
+		}
 		height: 140px;
 		position: relative;
 		&:hover{
@@ -1006,8 +1016,8 @@ article.profile {
 			.column(7,12);
 			.push(0);
 			@media (max-width: @max-width-mobile) {
-				.column(12,12);
-				.push(0,12);
+				.column(11,12);
+				.push(1,12);
 			}
 			text-indent: -1.3em;
 			& p {
@@ -1108,6 +1118,7 @@ footer {
 	@media (max-width: @max-width-mobile) {
 		.column(16);
 		.push(0);
+		display: none;
 	}
 	@media (max-width: @max-width-tablet) and (min-width: @max-width-mobile) {
 		.column(7);

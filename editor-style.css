@@ -8,3 +8,9 @@ body#tinymce.wp-editor hr {
     background-color: #ccc;
     height: 3px;
 }
+.align-left {
+    padding:0 10px 10px 0;
+}
+.align-right {
+    padding:0 0 10px 10px;
+}
