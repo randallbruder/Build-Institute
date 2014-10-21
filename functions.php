@@ -140,12 +140,48 @@
 		if ($a['arrow'] == 'left') { $button_classes .= " arrow-left"; }
 		if ($a['arrow'] == 'right') { $button_classes .= " arrow-right"; }
 		
-		return '<a href="'.$a['url'].'"><span class="'.$button_classes.'">' . $content . '</span></a>';
+		return '<a href="'.$a['url'].'" class="ghost-button-a"><span class="'.$button_classes.'">' . $content . '</span></a>';
 	}
 	
 	add_shortcode('button', 'ghost_button');
 
+	/* ========================================================================================================================
 	
+	Jetpack Share Image Thing
+	
+	======================================================================================================================== */
+
+	function fb_home_image( $tags ) {
+		if ( is_home() || is_front_page() ) {
+			// Remove the default blank image added by Jetpack
+			unset( $tags['og:image'] );
+	
+			$fb_home_img = home_url().'/facebook.jpg';
+			$tags['og:image'] = esc_url( $fb_home_img );
+		}
+		return $tags;
+	}
+	add_filter( 'jetpack_open_graph_tags', 'fb_home_image' );
+	
+	
+	
+	function fb_custom_image( $media, $post_id, $args ) {
+		if ( $media ) {
+			return $media;
+		} else {
+			$permalink = get_permalink( $post_id );
+			$url = apply_filters( 'jetpack_photon_url', home_url().'/facebook.jpg' );
+	
+			return array( array(
+				'type'  => 'image',
+				'from'  => 'custom_fallback',
+				'src'   => esc_url( $url ),
+				'href'  => $permalink,
+			) );
+		}
+	}
+	add_filter( 'jetpack_images_get_images', 'fb_custom_image', 10, 3 );
+
 
 	/* ========================================================================================================================
 	
@@ -184,6 +220,9 @@
 		
 		wp_register_script( 'mmenu-header', get_template_directory_uri().'/js/jquery.mmenu.header.min.js', array(), '4.5.5', true );
 		wp_enqueue_script( 'mmenu-header' );
+		
+		wp_register_script( 'balance-text', get_template_directory_uri().'/js/jquery.balancetext.min.js', array(), '1.3.0', true );
+		wp_enqueue_script( 'balance-text' );
 		
 		wp_register_style( 'screen', get_stylesheet_directory_uri().'/style.css', '', time().'.0', 'screen' );
 		wp_enqueue_style( 'screen' );

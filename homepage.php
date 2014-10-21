@@ -20,7 +20,7 @@
 ?>
 <?php Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'parts/shared/header-homepage' ) ); ?>
 
-<div id="homepage-content">
+<div id="homepage-content" class="balance-text">
 
     <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
         <?php the_content(); ?>

@@ -32,8 +32,8 @@ CONTENTS:
 09 Program Tiles
 10 Grad Profile Grid
 11 Grad Profile Single
-12 Footer
-13 Media queries
+12 Events
+13 Footer
 14 Misc & mixens
 ===========================
 */
@@ -41,14 +41,10 @@ CONTENTS:
 /* ----------------------------------------------------------------------------------------------------------
 01 Sensible defaults ----------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
-
-div,
-article,
-section,
-header,
-footer,
-nav,
-li					{ position:relative; /* For absolutely positioning elements within containers (add more to the list if need be) */ }
+header {
+div, article, section, header, footer, nav, li
+					{ position:relative; /* For absolutely positioning elements within containers (add more to the list if need be) } */ }
+}
 .group:after 		{ display:block; height:0; clear:both; content:"."; visibility:hidden; /* For clearing */ }
 body 				{ background: @bg-color; /* Don't forget to style your body to avoid user overrides */ }
 ::-moz-selection 	{ background:@accent-color; color:#fff; }
@@ -84,7 +80,7 @@ h1, h2, h3 {
 	letter-spacing: 0.5px;
 }
 
-h1 { .font-size(50px); padding-bottom: 10px; }
+h1 { .font-size(50px); padding-bottom: 10px; line-height: 1; }
 h2 { .font-size(30px); padding-bottom: 10px; }
 h3 { .font-size(24px); padding-bottom: 10px; }
 h4 { .font-size(16px); font-weight: bold; }
@@ -161,6 +157,31 @@ header {
 	background-size: cover; */
 }
 
+.header-mobile-homepage {
+	background: url('http://buildinstitute.org/wp-content/uploads/2014/08/header.jpg') no-repeat center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: 140px;
+	
+	@media (max-width: @max-width-mobile) {
+		height: 112px;
+	}
+	
+	& .icon-menu {
+		color: #fff;
+	}
+	& #mobile-menu-button {
+		padding-top: 26px;
+		@media (max-width: @max-width-mobile) {
+			padding-top: 13px;
+		}
+	}
+	& #header-mobile {
+		/* width: 100% !important; */
+	}
+}
 
 /* Some jquery.lightSlider.min.js overrided styles (I'm sorry) */
 .csSlideOuter {
@@ -181,23 +202,43 @@ header {
 		position: absolute;
 		list-style-type: none;
 		& h1 {
-			line-height: 1.05;
+			line-height: 1.16;
 			.column(10);
 			.push(2);
-			padding-bottom: 20px;
-			color: #fff;
 			padding-top: 225px;
+			padding-bottom: 0;
+			margin-bottom: -3px;
+			color: #fff;
+			& span {
+				background-color: rgba(58,196,187, .7); // This is the accent color converted to rgba: I know, it sucks.
+				display: inline;
+				padding: 0.7rem 1.3rem 0.1rem 1.2rem;
+				box-decoration-break: clone;
+				-webkit-box-decoration-break: clone;
+				-moz-box-decoration-break: clone;
+				-o-box-decoration-break: clone;
+			}
 		}
-		& p {
+		& .header-slider-content, & .header-slider-content-color {
 			.column(8);
 			.push(2);
 			.pull(6);
-			color: #fff;
+			line-height: 24px;
+			& p {
+				background-color: rgba(58,196,187, .7); // This is the accent color converted to rgba: I know, it sucks.
+				display: inline;
+				padding: 0.4rem 0.8rem 0.4rem 1.2rem;
+				color: #fff;
+				box-decoration-break: clone;
+				-webkit-box-decoration-break: clone;
+				-moz-box-decoration-break: clone;
+				-o-box-decoration-break: clone;
+			}
+			& .ghost-button-a {
+				display: block;
+			}
 		}
 		& .ghost-button {
-			float: left;
-			.push(2);
-			
 			border: 3px solid #fff;
 			color: #fff;
 			
@@ -513,8 +554,9 @@ main {
 
 main, #header-mobile {
 	@media (max-width: @max-width-mobile) {
-		width: 96.5%;
+		/* width: 96.5%; */
 		padding-left: 2.5%;
+		padding-right: 2.5%;
 	}
 }
 
@@ -533,10 +575,24 @@ footer {
 #homepage-content {
 	.column(8);
 	.push(4);
+	@media (max-width: @max-width-mobile) {
+		.column(14);
+		.push(1);
+	}
+	@media (max-width: @max-width-tablet) and (min-width: @max-width-mobile) {
+		.column(12);
+		.push(2);
+	}
 	& h2 {
 		text-align: center;
 		margin-top: 60px;
 		margin-bottom: 20px;
+		@media (max-width: @max-width-mobile) {
+			margin-top: 20px;
+		}
+		@media (max-width: @max-width-tablet) and (min-width: @max-width-mobile) {
+			margin-top: 40px;
+		}
 	}
 }
 
@@ -830,7 +886,7 @@ main.program {
 		.column(16);
 	}
 	padding-top: 10px;
-	& h1 {
+	& h1, h2 {
 		text-align: center;
 		padding-bottom: 30px;
 	}
@@ -1031,7 +1087,59 @@ article.profile {
 }
 
 /* ----------------------------------------------------------------------------------------------------------
-12 Footer ---------------------------------------------------------------------------------------------------
+12 Events ---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+#events-fullcalendar {
+	@media (max-width: @max-width-tablet) {
+		display: none;
+	}
+	text-transform: none !important;
+	
+}
+#events-list {
+	display: none;
+	@media (max-width: @max-width-tablet) {
+		display: block;
+	}
+	ul {
+		list-style: none;
+		padding-left: 0;
+		li {
+			padding-bottom: 40px;
+			.events-list-date {
+				font-weight: bold;
+			}
+		}
+	}
+}
+
+#event-date {
+}
+
+#event-venue {
+	padding-bottom: 10px;
+}
+
+.fc-event-time, .fc-event-title {
+	display: block;
+}
+
+.fc-view-month a {
+	background: @accent-color !important;
+	border-color: @accent-color !important;
+	padding-bottom: 5px;
+	&:hover {
+		background: @menu-color !important;
+		border-color: @menu-color !important;
+	}
+	& .fc-event-inner {
+		padding: 5px;
+	}
+}
+
+/* ----------------------------------------------------------------------------------------------------------
+13 Footer ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 
 #footer-clear {
@@ -1040,6 +1148,7 @@ article.profile {
 
 footer {
 	width: 100%;
+	min-height: 275px;
 	background: @footer-bg-color;
 	color: #fff;
 	overflow: auto;
@@ -1094,7 +1203,7 @@ footer {
 			padding-bottom: 5px;
 		}
 	}
-	&-events {
+	&-events, &-facebook, &-twitter {
 		.font-smoothing();
 		border-left: 1px #fff solid;
 		padding-left: 20px;
@@ -1106,11 +1215,95 @@ footer {
 			.font-size(13px);
 		}
 	}
+	&-events {
+		&:before, &:after {
+		  content: "";
+		  position: absolute;
+		  width: 0;
+		  height: 0;
+		  border-style: solid;
+		  border-color: transparent;
+		  border-left: 0;
+		}
+		&:before {
+		  top: 11px;
+		  left: 41px;
+		
+		  /* If 1px darken stroke slightly */
+		  border-right-color: #fff;
+		  border-width: 10px;
+		}
+		&:after {
+		  top: 12px;
+		  left: 42px;
+		  border-right-color: @footer-bg-color;
+		  border-width: 9px;
+		}
+	}
 	&-facebook {
 		display: none;
+		.date {
+			font-weight: bold;
+		}
+		.post {
+			padding-bottom: 10px;
+		}
+		&:before, &:after {
+		  content: "";
+		  position: absolute;
+		  width: 0;
+		  height: 0;
+		  border-style: solid;
+		  border-color: transparent;
+		  border-left: 0;
+		}
+		&:before {
+		  top: 48px;
+		  left: 41px;
+		
+		  /* If 1px darken stroke slightly */
+		  border-right-color: #fff;
+		  border-width: 10px;
+		}
+		&:after {
+		  top: 49px;
+		  left: 42px;
+		  border-right-color: @footer-bg-color;
+		  border-width: 9px;
+		}
 	}
 	&-twitter {
 		display: none;
+		.fetch-tweets-main {
+			padding: 0 !important;
+			.font-smoothing();
+		}
+		.fetch-tweets-text {
+			.font-size(13px);
+		}
+		&:before, &:after {
+		  content: "";
+		  position: absolute;
+		  width: 0;
+		  height: 0;
+		  border-style: solid;
+		  border-color: transparent;
+		  border-left: 0;
+		}
+		&:before {
+		  top: 87px;
+		  left: 41px;
+		
+		  /* If 1px darken stroke slightly */
+		  border-right-color: #fff;
+		  border-width: 10px;
+		}
+		&:after {
+		  top: 88px;
+		  left: 42px;
+		  border-right-color: @footer-bg-color;
+		  border-width: 9px;
+		}
 	}
 }
 #footer-right {
@@ -1129,25 +1322,6 @@ footer {
 .eo-events-widget li {
 	margin-bottom: 20px;
 }
-
-
-/* ----------------------------------------------------------------------------------------------------------
-13 Media queries --------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------- */
-
-/* Mobile */
-@media only screen and (max-device-width:480px) {
-
-
-}
-
-/* Retina Display */
-@media screen and (-webkit-min-device-pixel-ratio:2) {
-
-					 /* Place your styles here for all 'Retina' screens */
-					 
-}
-
 
 /* ----------------------------------------------------------------------------------------------------------
 14 Misc & mixens --------------------------------------------------------------------------------------------

@@ -15,21 +15,27 @@
 
 <?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 
-<article>
-
 	<h1><?php the_title(); ?></h1>
-	<time datetime="<?php the_time( 'Y-m-d' ); ?>" pubdate><?php the_date(); ?> <?php the_time(); ?></time> <?php comments_popup_link('Leave a Comment', '1 Comment', '% Comments'); ?>
-	<?php the_content(); ?>
+	
+	<div id="event-date"><h3><?php eo_the_start('l, F jS, Y'); ?> at <?php eo_the_start('g:ia'); ?></h3></div>
+	
+	<?php if( eo_get_venue() ): ?>
+		
+		<div id="event-venue">
+			<h4><?php eo_venue_name(); ?></h4>
+		</div>
 
-	<?php if ( get_the_author_meta( 'description' ) ) : ?>
-	<?php echo get_avatar( get_the_author_meta( 'user_email' ) ); ?>
-	<h3>About <?php echo get_the_author() ; ?></h3>
-	<?php the_author_meta( 'description' ); ?>
 	<?php endif; ?>
+	
+	<?php the_content(); ?>
+	
+	<?php if( eo_get_venue() ):
+		$location = explode(',', eo_get_venue_name(), 2);
+		echo do_shortcode( "[google-map-sc width=100% height=300 zoom=15 type=ROADMAP address='".$location[1]."']" );
+	endif; ?>
+	
+	<?php echo do_shortcode( '[button url="http://www.buildinstitute.com/events/" arrow="left"]All Events[/button]' ) ?>
 
-	<?php comments_template( '', true ); ?>
-
-</article>
 <?php endwhile; ?>
 
 </main>

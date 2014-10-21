@@ -12,7 +12,8 @@
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/img/favicon.ico"/>
 		<?php wp_head(); ?>
-		<link rel="image_src" href="<?php echo get_stylesheet_directory_uri(); ?>/img/facebook.jpg" / >
+		<link rel="image_src" href="<?php echo home_url(); ?>/facebook.jpg" />
+		<meta name="twitter:widgets:csp" content="on">
 	</head>
 	<body <?php body_class(); ?>>
 		

@@ -80,9 +80,16 @@ jQuery(document).ready(function($) {
 		var highlightHTML = "<style>::selection{background-color:" + $("#program-color").css("color") +
 						   " !important;}::-moz-selection{background-color:" + $("#program-color").css("color") + "!important;}</style>";
 		$(highlightHTML).insertAfter("body *:last");
-
-		
+	
 	}
+	
+	/* Program accent color replacement for header slides */
+	
+	$(".header-slider-content-color").each(function() {
+		var color = $(this).find(".program-color-header-slide").css( "background-color" );
+		color = color.replace('rgb', 'rgba').replace(')', ',.7)');
+		$(this).find("p").css( "background-color", color);
+	})
 	
 	/* Expandable li/ul for program pages */
 	
@@ -118,6 +125,7 @@ jQuery(document).ready(function($) {
 	});
 	  
 	/* Clamp.js for events in footer. */
+	
 	$('.clamp').each(function(index, element) {
 		$clamp(element, { clamp: 2, useNativeClamp: false });
 	});
@@ -130,5 +138,25 @@ jQuery(document).ready(function($) {
 			title: "Build Institute"
 		}
 	});
+	
+	/* Footer hover reveals */
+	
+	$("#footer-icon-twitter").hover( function() {
+		$("#footer-social-events").hide();
+		$("#footer-social-facebook").hide();
+		$("#footer-social-twitter").show();
+	})
+	
+	$("#footer-icon-events").hover( function() {
+		$("#footer-social-events").show();
+		$("#footer-social-facebook").hide();
+		$("#footer-social-twitter").hide();
+	})
+	
+	$("#footer-icon-facebook").hover( function() {
+		$("#footer-social-events").hide();
+		$("#footer-social-facebook").show();
+		$("#footer-social-twitter").hide();
+	})
 	
 });
