@@ -17,22 +17,74 @@
 
 <main>
 
-<?php if ( have_posts() ): ?>
-<h1>Latest Posts</h1>
-<ol>
-<?php while ( have_posts() ) : the_post(); ?>
-	<li>
-		<article>
-			<h2><a href="<?php esc_url( the_permalink() ); ?>" title="Permalink to <?php the_title(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-			<time datetime="<?php the_time( 'Y-m-d' ); ?>" pubdate><?php the_date(); ?> <?php the_time(); ?></time> <?php comments_popup_link('Leave a Comment', '1 Comment', '% Comments'); ?>
-			<?php the_content(); ?>
-		</article>
-	</li>
-<?php endwhile; ?>
-</ol>
-<?php else: ?>
-<h2>No posts to display</h2>
-<?php endif; ?>
+<div id="blog-header">
+	<?php if ( is_active_sidebar( 'blog_header' ) ) : ?>
+		<?php dynamic_sidebar( 'blog_header' ); ?>
+	<?php endif; ?>
+</div>
+
+<div id="blog-posts">
+
+	<?php if ( have_posts() ): ?>
+	
+	<?php while ( have_posts() ) : the_post(); ?>
+		<div class="blog-post">
+			<?php 
+			if ( has_post_thumbnail() ) {
+				$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+				echo '<div class="blog-post-thumbnail-wrapper"><div class="blog-post-thumbnail" style="background: url(' . $image[0] . '); background-size: cover;"></div></div>';
+			}
+			?>
+			<div class="blog-post-text">
+				<h2><a href="<?php esc_url( the_permalink() ); ?>" title="Permalink to <?php the_title(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
+				<p><?php print_custom_field('summary'); ?></p>
+				<p class="blog-post-meta">
+					Published on <time datetime="<?php the_time( 'Y-m-d' ); ?>" pubdate><?php the_date('F jS, Y'); ?></time><br />
+					Written by <?php print_custom_field('post_author_custom'); ?><br /><br />
+					
+					<?php
+					$postcategories = get_categories();
+					if ($postcategories) {
+						if (count($postcategories) == 1){
+							echo '<strong>Catergory:</strong> ';
+						}
+						else {
+							echo '<strong>Catergories:</strong> ';
+						}
+						foreach($postcategories as $category) {
+							echo $category->name . ', '; 
+						}
+					  	echo '<br />';
+					}
+					?>
+					
+					
+					<?php
+					$posttags = get_the_tags();
+					if ($posttags) {
+						echo '<strong>Tags:</strong> ';
+					  foreach($posttags as $tag) {
+						echo $tag->name . ', '; 
+					  }
+					}
+					?>
+				</p>
+			</div>
+		</div>
+	<?php endwhile; ?>
+	
+	<?php else: ?>
+		<h2>No posts to display</h2>
+	<?php endif; ?>
+
+</div>
+
+<div id="blog-sidebar">
+	<?php if ( is_active_sidebar( 'blog_sidebar' ) ) : ?>
+		<?php dynamic_sidebar( 'blog_sidebar' ); ?>
+	<?php endif; ?>
+					
+</div>
 
 </main>
 

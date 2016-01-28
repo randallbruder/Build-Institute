@@ -46,6 +46,9 @@
 	<div id="profile-content">
 		<?php the_content(); ?>
 	</div>
+	
+	<!-- Shortcode doesn't seem to work, just hardcoding the HTML in here, suppose it's the same anyway -->
+	<a href="http://buildinstitute.org/meet-our-grads/" class="ghost-button-a"><span class="ghost-button arrow-left">Back to all profiles</span></a>
 
 </article>
 <?php endwhile; ?>

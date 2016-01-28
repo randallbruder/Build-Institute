@@ -25,8 +25,7 @@
 	
 	======================================================================================================================== */
 
-	add_theme_support( 'post-thumbnails' );
-	add_theme_support( 'post-thumbnails', array( 'program', 'profile' ) );
+	add_theme_support( 'post-thumbnails', array( 'program', 'profile', 'post' ) );
 	
 	register_nav_menus(array('primary' => 'Primary Navigation'));
 
@@ -81,6 +80,24 @@
 			'after_widget' => '</div>',
 			'before_title' => '<h3>',
 			'after_title' => '</h3>',
+		) );
+		
+		register_sidebar( array(
+			'name' => 'Blog Sidebar',
+			'id' => 'blog_sidebar',
+			'before_widget' => '<div>',
+			'after_widget' => '</div>',
+			'before_title' => '<h3>',
+			'after_title' => '</h3>',
+		) );
+		
+		register_sidebar( array(
+			'name' => 'Blog Header',
+			'id' => 'blog_header',
+			'before_widget' => '<div>',
+			'after_widget' => '</div>',
+			'before_title' => '<h1>',
+			'after_title' => '</h1>',
 		) );
 	}
 	add_action( 'widgets_init', 'arphabet_widgets_init' );
@@ -197,8 +214,6 @@
 	 */
 
 	function starkers_script_enqueuer() {
-		wp_register_script( 'site', get_template_directory_uri().'/js/site.js', array( 'jquery' ), time().'.0' );
-		wp_enqueue_script( 'site' );
 		
 		wp_register_script( 'classie', get_template_directory_uri().'/js/classie.js', array(), '1.0', true );
 		wp_enqueue_script( 'classie' );
@@ -227,6 +242,9 @@
 		wp_register_style( 'screen', get_stylesheet_directory_uri().'/style.css', '', time().'.0', 'screen' );
 		wp_enqueue_style( 'screen' );
 		
+		wp_register_script( 'site', get_template_directory_uri().'/js/site.js', array( 'jquery' ), time().'.0' );
+		wp_enqueue_script( 'site' );
+		
 	}
 	
 	function my_theme_add_editor_styles() {
@@ -252,10 +270,8 @@
 		<?php if ( $comment->comment_approved == '1' ): ?>
 		<li>
 			<article id="comment-<?php comment_ID() ?>">
-				<?php echo get_avatar( $comment ); ?>
-				<h4><?php comment_author_link() ?></h4>
-				<time><a href="#comment-<?php comment_ID() ?>" pubdate><?php comment_date() ?> at <?php comment_time() ?></a></time>
 				<?php comment_text() ?>
+				<p class="comment-meta"><strong>Posted by <?php comment_author_link() ?></strong> on <time><a href="#comment-<?php comment_ID() ?>" pubdate><?php comment_date('F jS, Y') ?></a></time></p>
 			</article>
 		<?php endif;
 	}

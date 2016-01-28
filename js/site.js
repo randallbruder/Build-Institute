@@ -1,4 +1,19 @@
 jQuery(document).ready(function($) {
+	
+	/* Mobile Menu */
+	$("#mobile-menu").mmenu({
+		header: {
+			add: true,
+			update: true,
+			title: "Build Institute",
+		},
+		slidingSubmenus: false
+	}).on("opening.mm", function() {
+		var element = $('#mobile-menu li');
+		element.each(function() {
+			$(this).addClass('mm-opened');
+		});
+	});
 
 	/* Select inputs for Search/Newsletter dropdown */
 
@@ -130,33 +145,34 @@ jQuery(document).ready(function($) {
 		$clamp(element, { clamp: 2, useNativeClamp: false });
 	});
 	
-	/* Mobile Menu */
-	$("#mobile-menu").mmenu({
-		header: {
-			add: true,
-			update: true,
-			title: "Build Institute"
-		}
-	});
-	
 	/* Footer hover reveals */
 	
 	$("#footer-icon-twitter").hover( function() {
 		$("#footer-social-events").hide();
 		$("#footer-social-facebook").hide();
 		$("#footer-social-twitter").show();
+		$("#footer-social-instagram").hide();
 	})
 	
 	$("#footer-icon-events").hover( function() {
 		$("#footer-social-events").show();
 		$("#footer-social-facebook").hide();
 		$("#footer-social-twitter").hide();
+		$("#footer-social-instagram").hide();
 	})
 	
 	$("#footer-icon-facebook").hover( function() {
 		$("#footer-social-events").hide();
 		$("#footer-social-facebook").show();
 		$("#footer-social-twitter").hide();
+		$("#footer-social-instagram").hide();
+	})
+	
+	$("#footer-icon-instagram").hover( function() {
+		$("#footer-social-events").hide();
+		$("#footer-social-facebook").hide();
+		$("#footer-social-twitter").hide();
+		$("#footer-social-instagram").show();
 	})
 	
 });

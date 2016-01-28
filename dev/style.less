@@ -33,8 +33,10 @@ CONTENTS:
 10 Grad Profile Grid
 11 Grad Profile Single
 12 Events
-13 Footer
-14 Misc & mixens
+13 Blog
+14 Footer
+15 Searching
+16 Misc & mixens
 ===========================
 */
 
@@ -49,6 +51,8 @@ div, article, section, header, footer, nav, li
 body 				{ background: @bg-color; /* Don't forget to style your body to avoid user overrides */ }
 ::-moz-selection 	{ background:@accent-color; color:#fff; }
 ::selection 			{ background:@accent-color; color:#fff; }
+
+abbr[title], dfn[title] { border-bottom: 0 !important; cursor: inherit; }
 
 /* ----------------------------------------------------------------------------------------------------------
 02 LESS Variables -------------------------------------------------------------------------------------------
@@ -220,9 +224,9 @@ header {
 			}
 		}
 		& .header-slider-content, & .header-slider-content-color {
-			.column(8);
+			.column(7);
 			.push(2);
-			.pull(6);
+			.pull(7);
 			line-height: 24px;
 			& p {
 				background-color: rgba(58,196,187, .7); // This is the accent color converted to rgba: I know, it sucks.
@@ -452,6 +456,7 @@ input[type="checkbox"] {
 	
 	/* Homepage Overrides */
 	#header-homepage #menu-primary li a { color: #fff; background: none !important; }
+	#header-homepage #menu-primary > li:hover > a, #header-homepage #menu-primary .sub-menu li a { background: rgba(60, 60, 60, 0.7) !important; }
 	#header-homepage #menu-primary .sub-menu li a:hover { background: #fff !important; color: #000 !important; }
 	#header-homepage #menu-primary > li:hover > a, #header-homepage .sub-menu li a  { border: solid 3px #fff; }
 	
@@ -895,8 +900,10 @@ main.program {
 		@media (max-width: @max-width-mobile) {
 			.column(16,16);
 		}
-		@media (max-width: @max-width-tablet) and (min-width: @max-width-mobile) {
-		.column(6,12);
+		/* This used to be @max-width-tablet instead of 1420px, but because of
+		   the Co.Starters program name being to long, I wanted it to break sooner.  */
+		@media (max-width: 1420px) and (min-width: @max-width-mobile) {
+			.column(6,12);
 		}
 		margin-bottom: 1.1904762%;
 		@media (max-width: @max-width-mobile) {
@@ -973,7 +980,7 @@ div.ss-navigate { clear: both; }
 		width: 100%;
 		height: 300px;
 		background-size: cover;
-		background-position: center center;
+		background-position: center 25%;
 	}
 	& .profiles-title {
 		position: absolute;
@@ -1018,6 +1025,18 @@ article.profile {
 			display: none;
 		}
 	}
+	
+	/* A clearfix for ghost buttons */
+	& .ghost-button {
+		clear: both;
+		margin-top: 40px;
+		&.arrow-left {
+			float: left;
+		}
+		&.arrow-right {
+			float: right;
+		}
+	}
 }
 
 #profile {
@@ -1030,7 +1049,7 @@ article.profile {
 		}
 		height: 450px;
 		background-size: cover;
-		background-position: center center;
+		background-position: center 25%;
 	}
 	&-title {
 		.column(10,12);
@@ -1083,6 +1102,7 @@ article.profile {
 				font-weight: 900;
 			}
 		}
+		
 	}
 }
 
@@ -1139,7 +1159,132 @@ article.profile {
 }
 
 /* ----------------------------------------------------------------------------------------------------------
-13 Footer ---------------------------------------------------------------------------------------------------
+13 Blog -----------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+#blog-header { .column(11); }
+
+#blog-posts {
+	.column(11);
+	@media (max-width: @max-width-tablet) { .column(16); }
+	
+	.blog-post {
+		border-bottom: 1px @accent-color solid;
+		padding: 30px 0 38px;
+		&:first-child{
+			border-top: 1px @accent-color solid;
+		}
+		.clearfix;
+	}
+	
+	.blog-post-thumbnail-wrapper {
+		.column(3,11);
+		@media (max-width: @max-width-mobile) { .column(16); }
+	}
+	.blog-post-thumbnail {
+		width: 100%;
+		height: 150px;
+		float: left;
+		margin-top: 8px;
+	}
+	
+	.blog-post-text {
+		.column(8,11);
+		@media (max-width: @max-width-mobile) { .column(16); }
+		padding-left: 1em;
+		margin-bottom: 0 !important;
+		h2 {
+			line-height: 35px;
+			padding-top: 4px;
+		}
+	}
+	
+	.blog-post-meta {
+		.font-size(13px);
+		margin-bottom: 0 !important;
+	}
+}
+
+#blog-single {
+	.column(11);
+	@media (max-width: @max-width-tablet) { .column(16); }
+	
+	#comments {
+	margin-top: 40px;
+		ol {
+			list-style: none;
+			li {	
+				border-bottom: 1px solid @accent-color;
+				padding-top: 20px;
+				&:first-child { border-top: 1px solid @accent-color; }
+				.comment-meta {
+					
+				}
+			}
+		}
+	}
+	.comment-subscription-form { display: none; }
+	#respond {
+		padding-top: 20px;
+	}
+	#blog-content > p:last-child:after {
+		content: '';
+		display: inline-block;
+		width: 10px;
+		height: 10px;
+		background-color: @accent-color;
+		margin-left: 5px;
+	}
+	#reply-title {
+		padding-top: 10px;
+	}
+	blockquote {
+		text-indent: -1.3em;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+			& p {
+				color: @accent-color;
+				.font-size(36px);
+				line-height: 42px;
+				font-weight: 900;
+			}	
+	}
+}
+
+#blog-sidebar {
+	.column(4);
+	.push(1);
+	@media (max-width: @max-width-tablet) { .column(16); .push(0); }
+	> div {
+		margin-bottom: 10px;
+	}
+}
+
+#blog-authorbio {
+	border-top: 1px @accent-color solid;
+	border-bottom: 1px @accent-color solid;
+	padding: 30px 0;
+	margin-bottom: 25px;
+	.clearfix;
+	#blog-authorbio-image {
+		width: 200px;
+		height: 200px;
+		background-size: cover;
+		float: left;
+		margin-right: 15px;
+	}	
+}
+
+.tagcloud {
+	margin-bottom: 19.2px;
+	a {
+	.font-size(16px);
+	font-size: 16px !important;
+	}
+}
+
+/* ----------------------------------------------------------------------------------------------------------
+14 Footer ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 
 #footer-clear {
@@ -1203,7 +1348,7 @@ footer {
 			padding-bottom: 5px;
 		}
 	}
-	&-events, &-facebook, &-twitter {
+	&-events, &-facebook, &-twitter, &-instagram {
 		.font-smoothing();
 		border-left: 1px #fff solid;
 		padding-left: 20px;
@@ -1305,6 +1450,46 @@ footer {
 		  border-width: 9px;
 		}
 	}
+	&-instagram {
+		display: none;
+		& a {
+			width: 40%;
+			margin-right: 16px;
+			& img {
+				width: 40%;
+			}
+		}
+		& .instagram-details {
+			display: inline-block;
+			vertical-align: top;
+			width:         calc(60% - 16px);
+			width: -webkit-calc(60% - 16px);
+			width:    -moz-calc(60% - 16px);
+		}
+		&:before, &:after {
+		  content: "";
+		  position: absolute;
+		  width: 0;
+		  height: 0;
+		  border-style: solid;
+		  border-color: transparent;
+		  border-left: 0;
+		}
+		&:before {
+		  top: 125px;
+		  left: 41px;
+		
+		  /* If 1px darken stroke slightly */
+		  border-right-color: #fff;
+		  border-width: 10px;
+		}
+		&:after {
+		  top: 126px;
+		  left: 42px;
+		  border-right-color: @footer-bg-color;
+		  border-width: 9px;
+		}
+	}
 }
 #footer-right {
 	.column(4);
@@ -1324,7 +1509,15 @@ footer {
 }
 
 /* ----------------------------------------------------------------------------------------------------------
-14 Misc & mixens --------------------------------------------------------------------------------------------
+15 Searching ------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+.hilite {
+	background: yellow;
+}
+
+/* ----------------------------------------------------------------------------------------------------------
+16 Misc & mixens --------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------- */
 
 .icon {
